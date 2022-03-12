@@ -9,7 +9,7 @@ package org.redukti.cer.ir;
 import java.math.BigInteger;
 import java.util.List;
 
-import org.redukti.cer.Context;
+import org.redukti.cer.RuntimeContext;
 import org.redukti.cer.Versions;
 import org.redukti.cer.parser.Node;
 import org.redukti.cer.parser.ast.AstNode;
@@ -26,7 +26,7 @@ import org.redukti.cer.parser.Token;
 import org.redukti.cer.utils.*;
 
 /** Generates bytecode for the Interpreter. */
-class CodeGenerator extends Icode {
+public class CodeGenerator extends Icode {
 
     private static final int MIN_LABEL_TABLE_SIZE = 32;
     private static final int MIN_FIXUP_TABLE_SIZE = 40;
@@ -60,9 +60,9 @@ class CodeGenerator extends Icode {
     // ECF_ or Expression Context Flags constants: for now only TAIL
     private static final int ECF_TAIL = 1 << 0;
 
-    private Context cx;
+    private RuntimeContext cx;
 
-    public CodeGenerator(Context cx) {
+    public CodeGenerator(RuntimeContext cx) {
         this.cx = cx;
     }
 

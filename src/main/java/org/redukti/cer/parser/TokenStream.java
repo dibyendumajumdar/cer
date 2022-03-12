@@ -24,7 +24,7 @@ import java.math.BigInteger;
  * @author Mike McCabe
  * @author Brendan Eich
  */
-class TokenStream {
+public class TokenStream {
     /*
      * For chars - because we need something out-of-range
      * to check.  (And checking EOF by exception is annoying.)
@@ -83,7 +83,7 @@ class TokenStream {
         return "";
     }
 
-    static boolean isKeyword(String s, int version, boolean isStrict) {
+    public static boolean isKeyword(String s, int version, boolean isStrict) {
         return Token.EOF != stringToKeyword(s, version, isStrict);
     }
 

@@ -9,9 +9,9 @@ package org.redukti.cer.ir;
 import org.redukti.cer.parser.Token;
 
 /** Additional interpreter-specific codes */
-abstract class Icode {
+public abstract class Icode {
 
-    static final int
+    public static final int
 
             // delete operator used on a name
             Icode_DELNAME = 0,
@@ -149,7 +149,7 @@ abstract class Icode {
             // Last icode
             MIN_ICODE = -74;
 
-    static String bytecodeName(int bytecode) {
+    protected static String bytecodeName(int bytecode) {
         if (!validBytecode(bytecode)) {
             throw new IllegalArgumentException(String.valueOf(bytecode));
         }
@@ -325,7 +325,7 @@ abstract class Icode {
         return Token.FIRST_BYTECODE_TOKEN <= token && token <= Token.LAST_BYTECODE_TOKEN;
     }
 
-    static boolean validBytecode(int bytecode) {
+    protected static boolean validBytecode(int bytecode) {
         return validIcode(bytecode) || validTokenCode(bytecode);
     }
 }

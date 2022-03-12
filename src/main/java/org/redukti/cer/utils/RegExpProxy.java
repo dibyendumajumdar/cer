@@ -6,7 +6,7 @@
 
 package org.redukti.cer.utils;
 
-import org.redukti.cer.Context;
+import org.redukti.cer.RuntimeContext;
 import org.redukti.cer.Scriptable;
 
 /**
@@ -22,15 +22,15 @@ public interface RegExpProxy {
 
     public boolean isRegExp(Scriptable obj);
 
-    public Object compileRegExp(Context cx, String source, String flags);
+    public Object compileRegExp(RuntimeContext cx, String source, String flags);
 
-    public Scriptable wrapRegExp(Context cx, Scriptable scope, Object compiled);
+    public Scriptable wrapRegExp(RuntimeContext cx, Scriptable scope, Object compiled);
 
     public Object action(
-            Context cx, Scriptable scope, Scriptable thisObj, Object[] args, int actionType);
+            RuntimeContext cx, Scriptable scope, Scriptable thisObj, Object[] args, int actionType);
 
     public int find_split(
-            Context cx,
+            RuntimeContext cx,
             Scriptable scope,
             String target,
             String separator,
@@ -40,5 +40,5 @@ public interface RegExpProxy {
             boolean[] matched,
             String[][] parensp);
 
-    public Object js_split(Context _cx, Scriptable _scope, String thisString, Object[] _args);
+    public Object js_split(RuntimeContext _cx, Scriptable _scope, String thisString, Object[] _args);
 }

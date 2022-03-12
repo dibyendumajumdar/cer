@@ -21,7 +21,7 @@ public class DefaultErrorReporter implements ErrorReporter {
 
     private DefaultErrorReporter() {}
 
-    static ErrorReporter forEval(ErrorReporter reporter) {
+    public static ErrorReporter forEval(ErrorReporter reporter) {
         DefaultErrorReporter r = new DefaultErrorReporter();
         r.forEval = true;
         r.chainedReporter = reporter;

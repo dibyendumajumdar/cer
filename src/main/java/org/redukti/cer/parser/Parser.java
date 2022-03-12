@@ -49,13 +49,13 @@ public class Parser {
             TI_AFTER_EOL = 1 << 16, // first token of the source line
             TI_CHECK_LABEL = 1 << 17; // indicates to check for label
 
-    CompilerEnvirons compilerEnv;
+    protected CompilerEnvirons compilerEnv;
     private ErrorReporter errorReporter;
     private IdeErrorReporter errorCollector;
     private String sourceURI;
     private char[] sourceChars;
 
-    boolean calledByCompileFunction; // ugly - set directly by Context
+    public boolean calledByCompileFunction; // ugly - set directly by Context
     private boolean parseFinished; // set when finished to prevent reuse
 
     private TokenStream ts;
@@ -73,8 +73,8 @@ public class Parser {
 
     // The following are per function variables and should be saved/restored
     // during function parsing.  See PerFunctionVariables class below.
-    ScriptNode currentScriptOrFn;
-    Scope currentScope;
+    protected ScriptNode currentScriptOrFn;
+    protected Scope currentScope;
     private int endFlags;
     private boolean inForInit; // bound temporarily during forStatement()
     private Map<String, LabeledStatement> labelSet;
@@ -252,7 +252,7 @@ public class Parser {
                 : Messages.getMessageById(messageId, messageArg);
     }
 
-    void reportError(String messageId) {
+    protected void reportError(String messageId) {
         reportError(messageId, null);
     }
 
@@ -424,7 +424,7 @@ public class Parser {
         return nestingOfFunction != 0;
     }
 
-    void pushScope(Scope scope) {
+    protected void pushScope(Scope scope) {
         Scope parent = scope.getParentScope();
         // During codegen, parent scope chain may already be initialized,
         // in which case we just need to set currentScope variable.
@@ -436,7 +436,7 @@ public class Parser {
         currentScope = scope;
     }
 
-    void popScope() {
+    protected void popScope() {
         currentScope = currentScope.getParentScope();
     }
 
@@ -2162,7 +2162,7 @@ public class Parser {
         defineSymbol(declType, name, false);
     }
 
-    void defineSymbol(int declType, String name, boolean ignoreNotInBlock) {
+    protected void defineSymbol(int declType, String name, boolean ignoreNotInBlock) {
         if (name == null) {
             if (compilerEnv.isIdeMode()) { // be robust in IDE-mode
                 return;
@@ -3853,7 +3853,7 @@ public class Parser {
         private List<Loop> savedLoopSet;
         private List<Jump> savedLoopAndSwitchSet;
 
-        PerFunctionVariables(FunctionNode fnNode) {
+        public PerFunctionVariables(FunctionNode fnNode) {
             savedCurrentScriptOrFn = Parser.this.currentScriptOrFn;
             Parser.this.currentScriptOrFn = fnNode;
 
@@ -3876,7 +3876,7 @@ public class Parser {
             Parser.this.inForInit = false;
         }
 
-        void restore() {
+        public void restore() {
             Parser.this.currentScriptOrFn = savedCurrentScriptOrFn;
             Parser.this.currentScope = savedCurrentScope;
             Parser.this.labelSet = savedLabelSet;
@@ -3897,7 +3897,7 @@ public class Parser {
      * @param right expression to assign from
      * @return expression that performs a series of assignments to the variables defined in left
      */
-    Node createDestructuringAssignment(int type, Node left, Node right) {
+    protected Node createDestructuringAssignment(int type, Node left, Node right) {
         String tempName = currentScriptOrFn.getNextTempName();
         Node result = destructuringAssignmentHelper(type, left, right, tempName);
         Node comma = result.getLastChild();

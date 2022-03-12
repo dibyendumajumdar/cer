@@ -29,7 +29,7 @@ public class ObjToIntMap implements Serializable {
 
     public static class Iterator {
 
-        Iterator(ObjToIntMap master) {
+        public Iterator(ObjToIntMap master) {
             this.master = master;
         }
 

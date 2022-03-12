@@ -13,7 +13,7 @@ import java.io.Serializable;
 import java.math.BigInteger;
 import java.util.Arrays;
 
-final class InterpreterData implements Serializable, DebuggableScript {
+public final class InterpreterData implements Serializable, DebuggableScript {
     private static final long serialVersionUID = 5067677351589230234L;
 
     static final int INITIAL_MAX_ICODE_LENGTH = 1024;
@@ -45,53 +45,53 @@ final class InterpreterData implements Serializable, DebuggableScript {
         itsBigIntTable = new BigInteger[INITIAL_BIGINTTABLE_SIZE];
     }
 
-    String itsName;
-    String itsSourceFile;
-    boolean itsNeedsActivation;
-    int itsFunctionType;
+    public String itsName;
+    public String itsSourceFile;
+    public boolean itsNeedsActivation;
+    public int itsFunctionType;
 
-    String[] itsStringTable;
-    double[] itsDoubleTable;
-    BigInteger[] itsBigIntTable;
-    InterpreterData[] itsNestedFunctions;
-    Object[] itsRegExpLiterals;
-    Object[] itsTemplateLiterals;
+    public String[] itsStringTable;
+    public double[] itsDoubleTable;
+    public BigInteger[] itsBigIntTable;
+    public InterpreterData[] itsNestedFunctions;
+    public Object[] itsRegExpLiterals;
+    public Object[] itsTemplateLiterals;
 
-    byte[] itsICode;
+    public byte[] itsICode;
 
-    int[] itsExceptionTable;
+    public int[] itsExceptionTable;
 
-    int itsMaxVars;
-    int itsMaxLocals;
-    int itsMaxStack;
-    int itsMaxFrameArray;
+    public int itsMaxVars;
+    public int itsMaxLocals;
+    public int itsMaxStack;
+    public int itsMaxFrameArray;
 
     // see comments in NativeFuncion for definition of argNames and argCount
-    String[] argNames;
-    boolean[] argIsConst;
-    int argCount;
+    public String[] argNames;
+    public boolean[] argIsConst;
+    public int argCount;
 
     int itsMaxCalleeArgs;
 
-    String encodedSource;
-    int encodedSourceStart;
-    int encodedSourceEnd;
+    public String encodedSource;
+    public int encodedSourceStart;
+    public int encodedSourceEnd;
 
-    int languageVersion;
+    public int languageVersion;
 
-    boolean isStrict;
+    public boolean isStrict;
     boolean topLevel;
-    boolean isES6Generator;
+    public boolean isES6Generator;
 
-    Object[] literalIds;
+    public Object[] literalIds;
 
-    UintMap longJumps;
+    public UintMap longJumps;
 
-    int firstLinePC = -1; // PC for the first LINE icode
+    public int firstLinePC = -1; // PC for the first LINE icode
 
     InterpreterData parentData;
 
-    boolean evalScriptFlag; // true if script corresponds to eval() code
+    public boolean evalScriptFlag; // true if script corresponds to eval() code
 
     private int icodeHashCode = 0;
 
@@ -99,7 +99,7 @@ final class InterpreterData implements Serializable, DebuggableScript {
     boolean declaredAsVar;
 
     /** true if the function has been declared like "!function() {}". */
-    boolean declaredAsFunctionExpression;
+    public boolean declaredAsFunctionExpression;
 
     @Override
     public boolean isTopLevel() {

@@ -128,7 +128,7 @@ public abstract class RhinoException extends RuntimeException {
         this.lineSource = lineSource;
     }
 
-    final void recordErrorOrigin(
+    protected final void recordErrorOrigin(
             String sourceName, int lineNumber, String lineSource, int columnNumber) {
         // XXX: for compatibility allow for now -1 to mean 0
         if (lineNumber == -1) {
@@ -388,8 +388,8 @@ public abstract class RhinoException extends RuntimeException {
     private String lineSource;
     private int columnNumber;
 
-    Object interpreterStackInfo;
-    int[] interpreterLineData;
+    public Object interpreterStackInfo;
+    public int[] interpreterLineData;
 
     // Allow us to override default stack style for debugging.
     static {

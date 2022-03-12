@@ -41,7 +41,7 @@ public class Kit {
         return null;
     }
 
-    static Object newInstanceOrNull(Class<?> cl) {
+    public static Object newInstanceOrNull(Class<?> cl) {
         try {
             return cl.newInstance();
         } catch (SecurityException x) {
@@ -250,7 +250,7 @@ public class Kit {
         }
     }
 
-    static Object initHash(Map<Object, Object> h, Object key, Object initialValue) {
+    public static Object initHash(Map<Object, Object> h, Object key, Object initialValue) {
         synchronized (h) {
             Object current = h.get(key);
             if (current == null) {

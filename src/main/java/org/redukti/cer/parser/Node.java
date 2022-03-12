@@ -1246,11 +1246,11 @@ public class Node implements Iterable<Node> {
         }
     }
 
-    protected int type = Token.ERROR; // type of the node, e.g. Token.NAME
+    public int type = Token.ERROR; // type of the node, e.g. Token.NAME
     protected Node next; // next sibling
     protected Node first; // first element of a linked list of children
     protected Node last; // last element of a linked list of children
-    protected int lineno = -1;
+    public int lineno = -1;
 
     /**
      * Linked list of properties. Since vast majority of nodes would have no more then 2 properties,
