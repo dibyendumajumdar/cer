@@ -52,17 +52,19 @@ public interface DebuggableScript {
     /** Get the name of the source (usually filename or URL) of the script. */
     public String getSourceName();
 
+    // FIXME (dibyendu)
     /**
      * Returns true if this script or function were runtime-generated from JavaScript using <code>
      * eval</code> function or <code>Function</code> or <code>Script</code> constructors.
      */
-    public boolean isGeneratedScript();
+    //public boolean isGeneratedScript();
 
+    // FIXME (dibyendu)
     /**
      * Get array containing the line numbers that that can be passed to <code>
      * DebugFrame.onLineChange()</code>. Note that line order in the resulting array is arbitrary
      */
-    public int[] getLineNumbers();
+    //public int[] getLineNumbers();
 
     public int getFunctionCount();
 

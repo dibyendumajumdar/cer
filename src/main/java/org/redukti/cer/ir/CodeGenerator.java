@@ -9,6 +9,7 @@ package org.redukti.cer.ir;
 import java.math.BigInteger;
 import java.util.List;
 
+import org.redukti.cer.Context;
 import org.redukti.cer.Versions;
 import org.redukti.cer.parser.Node;
 import org.redukti.cer.parser.ast.AstNode;
@@ -22,10 +23,7 @@ import org.redukti.cer.parser.ast.TemplateCharacters;
 import org.redukti.cer.parser.ast.VariableInitializer;
 import org.redukti.cer.CompilerEnvirons;
 import org.redukti.cer.parser.Token;
-import org.redukti.cer.utils.Kit;
-import org.redukti.cer.utils.ObjArray;
-import org.redukti.cer.utils.ObjToIntMap;
-import org.redukti.cer.utils.UintMap;
+import org.redukti.cer.utils.*;
 
 /** Generates bytecode for the Interpreter. */
 class CodeGenerator extends Icode {
@@ -61,6 +59,12 @@ class CodeGenerator extends Icode {
 
     // ECF_ or Expression Context Flags constants: for now only TAIL
     private static final int ECF_TAIL = 1 << 0;
+
+    private Context cx;
+
+    public CodeGenerator(Context cx) {
+        this.cx = cx;
+    }
 
     public InterpreterData compile(
             CompilerEnvirons compilerEnv,
@@ -203,7 +207,8 @@ class CodeGenerator extends Icode {
             itsData.literalIds = literalIds.toArray();
         }
 
-        if (Token.printICode) Interpreter.dumpICode(itsData);
+        // FIXME (dibyendu)
+        //if (Token.printICode) Interpreter.dumpICode(itsData);
     }
 
     private void generateNestedFunctions() {
@@ -213,7 +218,7 @@ class CodeGenerator extends Icode {
         InterpreterData[] array = new InterpreterData[functionCount];
         for (int i = 0; i != functionCount; i++) {
             FunctionNode fn = scriptOrFn.getFunctionNode(i);
-            CodeGenerator gen = new CodeGenerator();
+            CodeGenerator gen = new CodeGenerator(cx);
             gen.compilerEnv = compilerEnv;
             gen.scriptOrFn = fn;
             gen.itsData = new InterpreterData(itsData);
@@ -234,8 +239,11 @@ class CodeGenerator extends Icode {
         int N = scriptOrFn.getRegexpCount();
         if (N == 0) return;
 
-        Context cx = Context.getContext();
-        RegExpProxy rep = ScriptRuntime.checkRegExpProxy(cx);
+        RegExpProxy rep = cx.getRegExpProxy();
+        if (rep == null) {
+            //throw Context.reportRuntimeErrorById("msg.no.regexp");
+            throw new RuntimeException("ERROR TODO");
+        }
         Object[] array = new Object[N];
         for (int i = 0; i != N; i++) {
             String string = scriptOrFn.getRegexpString(i);
@@ -1505,21 +1513,21 @@ class CodeGenerator extends Icode {
         int[] table = itsData.itsExceptionTable;
         if (table == null) {
             if (top != 0) Kit.codeBug();
-            table = new int[Interpreter.EXCEPTION_SLOT_SIZE * 2];
+            table = new int[InterpreterConstants.EXCEPTION_SLOT_SIZE * 2];
             itsData.itsExceptionTable = table;
         } else if (table.length == top) {
             table = new int[table.length * 2];
             System.arraycopy(itsData.itsExceptionTable, 0, table, 0, top);
             itsData.itsExceptionTable = table;
         }
-        table[top + Interpreter.EXCEPTION_TRY_START_SLOT] = icodeStart;
-        table[top + Interpreter.EXCEPTION_TRY_END_SLOT] = icodeEnd;
-        table[top + Interpreter.EXCEPTION_HANDLER_SLOT] = handlerStart;
-        table[top + Interpreter.EXCEPTION_TYPE_SLOT] = isFinally ? 1 : 0;
-        table[top + Interpreter.EXCEPTION_LOCAL_SLOT] = exceptionObjectLocal;
-        table[top + Interpreter.EXCEPTION_SCOPE_SLOT] = scopeLocal;
+        table[top + InterpreterConstants.EXCEPTION_TRY_START_SLOT] = icodeStart;
+        table[top + InterpreterConstants.EXCEPTION_TRY_END_SLOT] = icodeEnd;
+        table[top + InterpreterConstants.EXCEPTION_HANDLER_SLOT] = handlerStart;
+        table[top + InterpreterConstants.EXCEPTION_TYPE_SLOT] = isFinally ? 1 : 0;
+        table[top + InterpreterConstants.EXCEPTION_LOCAL_SLOT] = exceptionObjectLocal;
+        table[top + InterpreterConstants.EXCEPTION_SCOPE_SLOT] = scopeLocal;
 
-        exceptionTableTop = top + Interpreter.EXCEPTION_SLOT_SIZE;
+        exceptionTableTop = top + InterpreterConstants.EXCEPTION_SLOT_SIZE;
     }
 
     private byte[] increaseICodeCapacity(int extraSize) {

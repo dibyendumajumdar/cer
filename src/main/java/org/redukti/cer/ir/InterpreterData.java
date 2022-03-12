@@ -140,15 +140,16 @@ final class InterpreterData implements Serializable, DebuggableScript {
         return itsSourceFile;
     }
 
-    @Override
-    public boolean isGeneratedScript() {
-        return ScriptRuntime.isGeneratedScript(itsSourceFile);
-    }
-
-    @Override
-    public int[] getLineNumbers() {
-        return Interpreter.getLineNumbers(this);
-    }
+    // FIXME (dibyendu)
+//    @Override
+//    public boolean isGeneratedScript() {
+//        return ScriptRuntime.isGeneratedScript(itsSourceFile);
+//    }
+//
+//    @Override
+//    public int[] getLineNumbers() {
+//        return Interpreter.getLineNumbers(this);
+//    }
 
     @Override
     public int getFunctionCount() {

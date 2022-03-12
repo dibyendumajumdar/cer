@@ -19,6 +19,7 @@ import org.redukti.cer.parser.ast.Scope;
 import org.redukti.cer.parser.ast.ScriptNode;
 import org.redukti.cer.utils.Kit;
 import org.redukti.cer.utils.ObjArray;
+import org.redukti.cer.utils.StringUtils;
 
 /**
  * This class transforms a tree to a lower-level representation for codegen.
@@ -450,7 +451,7 @@ public class NodeTransformer {
                     current = c.getFirstChild(); // should be a NAME, checked below
                 }
                 if (current.getType() != Token.NAME) throw Kit.codeBug();
-                list.add(ScriptRuntime.getIndexObject(current.getString()));
+                list.add(StringUtils.getIndexObject(current.getString()));
                 Node init = current.getFirstChild();
                 if (init == null) {
                     init = new Node(Token.VOID, Node.newNumber(0.0));
