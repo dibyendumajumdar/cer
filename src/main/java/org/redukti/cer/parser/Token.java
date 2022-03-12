@@ -25,8 +25,8 @@ public class Token {
 
     // debug flags
     public static final boolean printTrees = false;
-    static final boolean printICode = false;
-    static final boolean printNames = printTrees || printICode;
+    public static final boolean printICode = false;
+    public static final boolean printNames = printTrees || printICode;
 
     /** Token types. These values correspond to JSTokenType values in jsscan.c. */
     public static final int
