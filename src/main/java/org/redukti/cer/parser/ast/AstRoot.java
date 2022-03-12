@@ -17,8 +17,8 @@ import org.redukti.cer.parser.Token;
  * Token#SCRIPT}.
  *
  * <p>Note that the tree itself does not store errors. To collect the parse errors and warnings,
- * pass an {@link org.mozilla.javascript.ErrorReporter} to the {@link org.mozilla.javascript.Parser}
- * via the {@link org.mozilla.javascript.CompilerEnvirons}.
+ * pass an {@link org.redukti.cer.parser.ErrorReporter} to the {@link org.redukti.cer.parser.Parser}
+ * via the {@link org.redukti.cer.CompilerEnvirons}.
  */
 public class AstRoot extends ScriptNode {
 

@@ -66,7 +66,7 @@ public class Comment extends AstNode {
     /**
      * Sets the comment style
      *
-     * @param type the comment style, a {@link org.mozilla.javascript.Token.CommentType}
+     * @param type the comment style, a {@link org.redukti.cer.parser.Token.CommentType}
      */
     public void setCommentType(Token.CommentType type) {
         this.commentType = type;

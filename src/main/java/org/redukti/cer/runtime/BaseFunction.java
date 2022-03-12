@@ -70,7 +70,7 @@ public class BaseFunction extends IdScriptableObject implements Function {
     /**
      * Gets the value returned by calling the typeof operator on this object.
      *
-     * @see org.mozilla.javascript.ScriptableObject#getTypeOf()
+     * @see org.redukti.cer.runtime.ScriptableObject#getTypeOf()
      * @return "function" or "undefined" if {@link #avoidObjectDetection()} returns <code>true
      *     </code>
      */

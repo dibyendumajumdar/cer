@@ -24,7 +24,7 @@ import org.redukti.cer.Scriptable;
  *
  * <p>These three pieces of functionality are encapsulated in the SecurityController class.
  *
- * @see org.mozilla.javascript.Context#setSecurityController(SecurityController)
+ * @see org.redukti.cer.runtime.Context#setSecurityController(SecurityController)
  * @see java.lang.ClassLoader
  * @since 1.5 Release 4
  */

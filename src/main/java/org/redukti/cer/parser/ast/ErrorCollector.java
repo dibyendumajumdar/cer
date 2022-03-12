@@ -13,7 +13,7 @@ import java.util.List;
 
 /**
  * An error reporter that gathers the errors and warnings for later display. This a useful {@link
- * org.mozilla.javascript.ErrorReporter} when the {@link org.mozilla.javascript.CompilerEnvirons} is
+ * org.redukti.cer.parser.ErrorReporter} when the {@link org.redukti.cer.CompilerEnvirons} is
  * set to ide-mode (for IDEs).
  *
  * @author Steve Yegge

@@ -11,7 +11,7 @@ package org.redukti.cer.parser;
  *
  * <p>It is based on the C source files jsscan.c and jsscan.h in the jsref package.
  *
- * @see org.mozilla.javascript.Parser
+ * @see org.redukti.cer.runtime.Parser
  * @author Mike McCabe
  * @author Brendan Eich
  */

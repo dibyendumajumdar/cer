@@ -154,7 +154,7 @@ public interface Scriptable {
      *   <LI>java.lang.Boolean objects
      *   <LI>java.lang.String objects
      *   <LI>java.lang.Number objects
-     *   <LI>org.mozilla.javascript.Scriptable objects
+     *   <LI>org.redukti.cer.Scriptable objects
      *   <LI>null
      *   <LI>The value returned by Context.getUndefinedValue()
      * </UL>
@@ -170,10 +170,10 @@ public interface Scriptable {
      * @param name the name of the property
      * @param start the object whose property is being set
      * @param value value to set the property to
-     * @see org.mozilla.javascript.Scriptable#has(String, Scriptable)
-     * @see org.mozilla.javascript.Scriptable#get(String, Scriptable)
-     * @see org.mozilla.javascript.ScriptableObject#putProperty(Scriptable, String, Object)
-     * @see org.mozilla.javascript.Context#toObject(Object, Scriptable)
+     * @see org.redukti.cer.Scriptable#has(String, Scriptable)
+     * @see org.redukti.cer.Scriptable#get(String, Scriptable)
+     * @see org.redukti.cer.ScriptableObject#putProperty(Scriptable, String, Object)
+     * @see org.redukti.cer.runtime.Context#toObject(Object, Scriptable)
      */
     public void put(String name, Scriptable start, Object value);
 
@@ -188,10 +188,10 @@ public interface Scriptable {
      * @param index the numeric index for the property
      * @param start the object whose property is being set
      * @param value value to set the property to
-     * @see org.mozilla.javascript.Scriptable#has(int, Scriptable)
-     * @see org.mozilla.javascript.Scriptable#get(int, Scriptable)
-     * @see org.mozilla.javascript.ScriptableObject#putProperty(Scriptable, int, Object)
-     * @see org.mozilla.javascript.Context#toObject(Object, Scriptable)
+     * @see org.redukti.cer.Scriptable#has(int, Scriptable)
+     * @see org.redukti.cer.Scriptable#get(int, Scriptable)
+     * @see org.redukti.cer.ScriptableObject#putProperty(Scriptable, int, Object)
+     * @see org.redukti.cer.runtime.Context#toObject(Object, Scriptable)
      */
     public void put(int index, Scriptable start, Object value);
 
@@ -209,8 +209,8 @@ public interface Scriptable {
      * <p>To delete properties defined in a prototype chain, see deleteProperty in ScriptableObject.
      *
      * @param name the identifier for the property
-     * @see org.mozilla.javascript.Scriptable#get(String, Scriptable)
-     * @see org.mozilla.javascript.ScriptableObject#deleteProperty(Scriptable, String)
+     * @see org.redukti.cer.Scriptable#get(String, Scriptable)
+     * @see org.redukti.cer.runtime.ScriptableObject#deleteProperty(Scriptable, String)
      */
     public void delete(String name);
 
@@ -225,8 +225,8 @@ public interface Scriptable {
      * the property.
      *
      * @param index the numeric index for the property
-     * @see org.mozilla.javascript.Scriptable#get(int, Scriptable)
-     * @see org.mozilla.javascript.ScriptableObject#deleteProperty(Scriptable, int)
+     * @see org.redukti.cer.Scriptable#get(int, Scriptable)
+     * @see org.redukti.cer.runtime.ScriptableObject#deleteProperty(Scriptable, int)
      */
     public void delete(int index);
 

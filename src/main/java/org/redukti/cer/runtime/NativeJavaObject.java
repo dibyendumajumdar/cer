@@ -479,7 +479,7 @@ public class NativeJavaObject implements Scriptable, SymbolScriptable, Wrapper, 
      * Not intended for public use. Callers should use the public API Context.toType.
      *
      * @deprecated as of 1.5 Release 4
-     * @see org.mozilla.javascript.Context#jsToJava(Object, Class)
+     * @see org.redukti.cer.runtime.Context#jsToJava(Object, Class)
      */
     @Deprecated
     public static Object coerceType(Class<?> type, Object value) {
@@ -973,7 +973,7 @@ public class NativeJavaObject implements Scriptable, SymbolScriptable, Wrapper, 
     static {
         // Reflection in java is verbose
         Class<?>[] sig2 = new Class[2];
-        Class<?> cl = Kit.classOrNull("org.mozilla.javascript.JavaAdapter");
+        Class<?> cl = Kit.classOrNull("org.redukti.cer.runtime.JavaAdapter");
         if (cl != null) {
             try {
                 sig2[0] = ScriptRuntime.ObjectClass;

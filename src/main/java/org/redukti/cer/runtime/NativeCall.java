@@ -14,7 +14,7 @@ import org.redukti.cer.ir.InterpreterConstants;
  *
  * <p>See ECMA 10.1.6
  *
- * @see org.mozilla.javascript.Arguments
+ * @see org.redukti.cer.runtime.Arguments
  * @author Norris Boyd
  */
 public final class NativeCall extends IdScriptableObject {

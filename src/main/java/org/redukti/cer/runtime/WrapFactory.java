@@ -21,7 +21,7 @@ import java.util.Map;
  * context), Rhino will call the methods of this class whenever it needs to wrap a value resulting
  * from a call to a Java method or an access to a Java field.
  *
- * @see org.mozilla.javascript.Context#setWrapFactory(WrapFactory)
+ * @see org.redukti.cer.runtime.Context#setWrapFactory(WrapFactory)
  * @since 1.5 Release 4
  */
 public class WrapFactory {
@@ -34,7 +34,7 @@ public class WrapFactory {
      *   <LI>java.lang.Boolean
      *   <LI>java.lang.String
      *   <LI>java.lang.Number
-     *   <LI>org.mozilla.javascript.Scriptable objects
+     *   <LI>org.redukti.cer.Scriptable objects
      *   <LI>The value returned by Context.getUndefinedValue()
      *   <LI>null
      * </UL>

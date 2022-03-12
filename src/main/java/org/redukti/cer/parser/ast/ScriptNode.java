@@ -123,7 +123,7 @@ public class ScriptNode extends Scope {
      * Returns a canonical version of the source for this script or function, for use in
      * implementing the {@code Object.toSource} method of JavaScript objects. This source encoding
      * is only recorded during code generation. It must be passed back to {@link
-     * org.mozilla.javascript.Decompiler#decompile} to construct the human-readable source string.
+     * org.redukti.cer.ir.Decompiler#decompile} to construct the human-readable source string.
      *
      * <p>Given a parsed AST, you can always convert it to source code using the {@link
      * AstNode#toSource} method, although it's not guaranteed to produce exactly the same results as

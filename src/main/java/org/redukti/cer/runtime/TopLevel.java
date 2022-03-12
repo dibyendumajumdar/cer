@@ -25,7 +25,7 @@ import java.util.EnumMap;
  * ScriptRuntime#setBuiltinProtoAndParent ScriptRuntime.setBuiltinProtoAndParent} methods should be
  * used to create and initialize objects of built-in classes instead of their generic counterparts.
  *
- * <p>Calling {@link org.mozilla.javascript.Context#initStandardObjects()} with an instance of this
+ * <p>Calling {@link org.redukti.cer.runtime.Context#initStandardObjects()} with an instance of this
  * class as argument will automatically cache built-in classes after initialization. For other
  * setups involving top-level scopes that inherit global properties from their proptotypes (e.g.
  * with dynamic scopes) embeddings should explicitly call {@link #cacheBuiltins(Scriptable,
@@ -227,7 +227,7 @@ public class TopLevel extends IdScriptableObject {
 
     /**
      * Get the cached native error constructor from this scope with the given <code>type</code>.
-     * Returns null if {@link #cacheBuiltins()} has not been called on this object.
+     * Returns null if {@link #cacheBuiltins(Scriptable, boolean)} has not been called on this object.
      *
      * @param type the native error type
      * @return the native error constructor

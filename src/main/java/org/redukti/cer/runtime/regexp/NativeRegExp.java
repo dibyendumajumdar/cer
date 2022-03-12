@@ -141,7 +141,7 @@ public class NativeRegExp extends IdScriptableObject {
     /**
      * Gets the value to be returned by the typeof operator called on this object.
      *
-     * @see org.mozilla.javascript.ScriptableObject#getTypeOf()
+     * @see org.redukti.cer.runtime.ScriptableObject#getTypeOf()
      * @return "object"
      */
     @Override

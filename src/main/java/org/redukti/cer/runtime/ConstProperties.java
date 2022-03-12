@@ -37,7 +37,7 @@ public interface ConstProperties {
      *   <LI>java.lang.Boolean objects
      *   <LI>java.lang.String objects
      *   <LI>java.lang.Number objects
-     *   <LI>org.mozilla.javascript.Scriptable objects
+     *   <LI>org.redukti.cer.Scriptable objects
      *   <LI>null
      *   <LI>The value returned by Context.getUndefinedValue()
      * </UL>
@@ -53,10 +53,10 @@ public interface ConstProperties {
      * @param name the name of the property
      * @param start the object whose property is being set
      * @param value value to set the property to
-     * @see org.mozilla.javascript.Scriptable#has(String, Scriptable)
-     * @see org.mozilla.javascript.Scriptable#get(String, Scriptable)
-     * @see org.mozilla.javascript.ScriptableObject#putProperty(Scriptable, String, Object)
-     * @see org.mozilla.javascript.Context#toObject(Object, Scriptable)
+     * @see org.redukti.cer.Scriptable#has(String, Scriptable)
+     * @see org.redukti.cer.Scriptable#get(String, Scriptable)
+     * @see org.redukti.cer.runtime.ScriptableObject#putProperty(Scriptable, String, Object)
+     * @see org.redukti.cer.runtime.Context#toObject(Object, Scriptable)
      */
     public void putConst(String name, Scriptable start, Object value);
 

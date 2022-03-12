@@ -11,7 +11,7 @@ import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-//import org.mozilla.javascript.Kit;
+//import org.redukti.cer.runtime.Kit;
 import org.redukti.cer.parser.Node;
 import org.redukti.cer.parser.Token;
 

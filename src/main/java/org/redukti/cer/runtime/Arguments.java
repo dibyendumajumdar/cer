@@ -16,7 +16,7 @@ import org.redukti.cer.utils.UniqueTag;
  *
  * <p>See ECMA 10.1.8
  *
- * @see org.mozilla.javascript.NativeCall
+ * @see org.redukti.cer.runtime.NativeCall
  * @author Norris Boyd
  */
 final class Arguments extends IdScriptableObject {

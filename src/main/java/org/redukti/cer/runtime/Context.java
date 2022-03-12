@@ -675,7 +675,7 @@ public class Context implements RuntimeContext, Closeable, Versions {
     /**
      * Get the current error reporter.
      *
-     * @see org.redukti.cer.runtime.ErrorReporter
+     * @see org.redukti.cer.parser.ErrorReporter
      */
     public final ErrorReporter getErrorReporter() {
         if (errorReporter == null) {
@@ -688,7 +688,7 @@ public class Context implements RuntimeContext, Closeable, Versions {
      * Change the current error reporter.
      *
      * @return the previous error reporter
-     * @see org.redukti.cer.runtime.ErrorReporter
+     * @see org.redukti.cer.parser.ErrorReporter
      */
     public final ErrorReporter setErrorReporter(ErrorReporter reporter) {
         if (sealed) onSealedMutation();
@@ -816,7 +816,7 @@ public class Context implements RuntimeContext, Closeable, Versions {
      * @param lineno the starting line number
      * @param lineSource the text of the line (may be null)
      * @param lineOffset the offset into lineSource where problem was detected
-     * @see org.redukti.cer.runtime.ErrorReporter
+     * @see org.redukti.cer.parser.ErrorReporter
      */
     public static void reportWarning(
             String message, String sourceName, int lineno, String lineSource, int lineOffset) {
@@ -830,7 +830,7 @@ public class Context implements RuntimeContext, Closeable, Versions {
      * Report a warning using the error reporter for the current thread.
      *
      * @param message the warning message to report
-     * @see org.redukti.cer.runtime.ErrorReporter
+     * @see org.redukti.cer.parser.ErrorReporter
      */
     public static void reportWarning(String message) {
         int[] linep = {0};
@@ -857,7 +857,7 @@ public class Context implements RuntimeContext, Closeable, Versions {
      * @param lineno the starting line number
      * @param lineSource the text of the line (may be null)
      * @param lineOffset the offset into lineSource where problem was detected
-     * @see org.redukti.cer.runtime.ErrorReporter
+     * @see org.redukti.cer.parser.ErrorReporter
      */
     public static void reportError(
             String message, String sourceName, int lineno, String lineSource, int lineOffset) {
@@ -873,7 +873,7 @@ public class Context implements RuntimeContext, Closeable, Versions {
      * Report an error using the error reporter for the current thread.
      *
      * @param message the error message to report
-     * @see org.redukti.cer.runtime.ErrorReporter
+     * @see org.redukti.cer.parser.ErrorReporter
      */
     public static void reportError(String message) {
         int[] linep = {0};
@@ -890,7 +890,7 @@ public class Context implements RuntimeContext, Closeable, Versions {
      * @param lineSource the text of the line (may be null)
      * @param lineOffset the offset into lineSource where problem was detected
      * @return a runtime exception that will be thrown to terminate the execution of the script
-     * @see org.redukti.cer.runtime.ErrorReporter
+     * @see org.redukti.cer.parser.ErrorReporter
      */
     public static EvaluatorException reportRuntimeError(
             String message, String sourceName, int lineno, String lineSource, int lineOffset) {
@@ -948,7 +948,7 @@ public class Context implements RuntimeContext, Closeable, Versions {
      * Report a runtime error using the error reporter for the current thread.
      *
      * @param message the error message to report
-     * @see org.redukti.cer.runtime.ErrorReporter
+     * @see org.redukti.cer.parser.ErrorReporter
      */
     public static EvaluatorException reportRuntimeError(String message) {
         int[] linep = {0};

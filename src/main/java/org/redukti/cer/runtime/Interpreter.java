@@ -918,7 +918,7 @@ public final class Interpreter extends Icode implements Evaluator {
 
     @Override
     public String getPatchedStack(RhinoException ex, String nativeStackTrace) {
-        String tag = "org.mozilla.javascript.Interpreter.interpretLoop";
+        String tag = "org.redukti.cer.runtime.Interpreter.interpretLoop";
         StringBuilder sb = new StringBuilder(nativeStackTrace.length() + 1000);
         String lineSeparator = SecurityUtilities.getSystemProperty("line.separator");
 

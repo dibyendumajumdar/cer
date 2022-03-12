@@ -78,7 +78,7 @@ public class FunctionObject extends BaseFunction {
      * @param methodOrConstructor a java.lang.reflect.Method or a java.lang.reflect.Constructor that
      *     defines the object
      * @param scope enclosing scope of function
-     * @see org.mozilla.javascript.Scriptable
+     * @see org.redukti.cer.Scriptable
      */
     public FunctionObject(String name, Member methodOrConstructor, Scriptable scope) {
         if (methodOrConstructor instanceof Constructor) {
@@ -279,9 +279,9 @@ public class FunctionObject extends BaseFunction {
      *
      * @param scope the scope in which to define the constructor (typically the global object)
      * @param prototype the prototype object
-     * @see org.mozilla.javascript.Scriptable#setParentScope
-     * @see org.mozilla.javascript.Scriptable#setPrototype
-     * @see org.mozilla.javascript.Scriptable#getClassName
+     * @see org.redukti.cer.Scriptable#setParentScope
+     * @see org.redukti.cer.Scriptable#setPrototype
+     * @see org.redukti.cer.Scriptable#getClassName
      */
     public void addAsConstructor(Scriptable scope, Scriptable prototype) {
         initAsConstructor(scope, prototype);
@@ -321,7 +321,7 @@ public class FunctionObject extends BaseFunction {
      *
      * <p>Implements Function.call.
      *
-     * @see org.mozilla.javascript.Function#call( Context, Scriptable, Scriptable, Object[])
+     * @see org.redukti.cer.runtime.Function#call( Context, Scriptable, Scriptable, Object[])
      */
     @Override
     public Object call(Context cx, Scriptable scope, Scriptable thisObj, Object[] args) {

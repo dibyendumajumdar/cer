@@ -22,16 +22,10 @@ public abstract class RhinoException extends RuntimeException {
     private static final Pattern JAVA_STACK_PATTERN = Pattern.compile("_c_(.*)_\\d+");
 
     public RhinoException() {
-// FIXME (dibyendu)
-//        Evaluator e = Context.createInterpreter();
-//        if (e != null) e.captureStackInfo(this);
     }
 
     public RhinoException(String details) {
         super(details);
-        // FIXME (dibyendu)
-        //        Evaluator e = Context.createInterpreter();
-        //        if (e != null) e.captureStackInfo(this);
     }
 
     @Override
@@ -298,7 +292,7 @@ public abstract class RhinoException extends RuntimeException {
                     count++;
                 }
 
-            } else if ("org.mozilla.javascript.Interpreter".equals(e.getClassName())
+            } else if ("org.redukti.cer.runtime.Interpreter".equals(e.getClassName())
                     && "interpretLoop".equals(e.getMethodName())
                     && interpreterStack != null
                     && interpreterStack.length > interpreterStackIndex) {

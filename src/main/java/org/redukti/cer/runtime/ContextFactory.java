@@ -31,7 +31,7 @@ import java.security.PrivilegedAction;
  * features.
  *
  * <pre>
- * import org.mozilla.javascript.*;
+ * import org.redukti.cer.runtime.*;
  *
  * class MyFactory extends ContextFactory
  * {

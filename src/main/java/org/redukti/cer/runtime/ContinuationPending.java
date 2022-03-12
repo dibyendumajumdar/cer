@@ -7,12 +7,12 @@
 package org.redukti.cer.runtime;
 
 /**
- * Exception thrown by {@link org.mozilla.javascript.Context#executeScriptWithContinuations(Script,
- * Scriptable)} and {@link org.mozilla.javascript.Context#callFunctionWithContinuations(Callable,
- * Scriptable, Object[])} when execution encounters a continuation captured by {@link
- * org.mozilla.javascript.Context#captureContinuation()}. Exception will contain the captured state
+ * Exception thrown by {@link org.redukti.cer.runtime.Context#executeScriptWithContinuations(org.redukti.cer.runtime.Script,
+ * org.redukti.cer.Scriptable)} and {@link org.redukti.cer.runtime.Context#callFunctionWithContinuations(org.redukti.cer.runtime.Callable,
+ * org.redukti.cer.Scriptable, Object[])} when execution encounters a continuation captured by {@link
+ * org.redukti.cer.runtime.Context#captureContinuation()}. Exception will contain the captured state
  * needed to restart the continuation with {@link
- * org.mozilla.javascript.Context#resumeContinuation(Object, Scriptable, Object)}.
+ * org.redukti.cer.runtime.Context#resumeContinuation(Object, org.redukti.cer.Scriptable, Object)}.
  *
  * @author Norris Boyd
  */
@@ -24,8 +24,8 @@ public class ContinuationPending extends RuntimeException {
     /**
      * Construct a ContinuationPending exception. Internal call only; users of the API should get
      * continuations created on their behalf by calling {@link
-     * org.mozilla.javascript.Context#executeScriptWithContinuations(Script, Scriptable)} and {@link
-     * org.mozilla.javascript.Context#callFunctionWithContinuations(Callable, Scriptable, Object[])}
+     * org.redukti.cer.runtime.Context#executeScriptWithContinuations(Script, org.redukti.cer.Scriptable)} and {@link
+     * org.redukti.cer.runtime.Context#callFunctionWithContinuations(Callable, org.redukti.cer.Scriptable, Object[])}
      * Creating subclasses allowed.
      *
      * @param continuationState Internal Continuation object
@@ -36,7 +36,7 @@ public class ContinuationPending extends RuntimeException {
 
     /**
      * Get continuation object. The only use for this object is to be passed to {@link
-     * org.mozilla.javascript.Context#resumeContinuation(Object, Scriptable, Object)}.
+     * org.redukti.cer.runtime.Context#resumeContinuation(Object, org.redukti.cer.Scriptable, Object)}.
      *
      * @return continuation object
      */

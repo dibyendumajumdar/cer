@@ -254,7 +254,7 @@ public class FunctionNode extends ScriptNode {
 
     /**
      * Return true if this function requires an Ecma-262 Activation object. The Activation object is
-     * implemented by {@link org.mozilla.javascript.NativeCall}, and is fairly expensive to create,
+     * implemented by {@link org.redukti.cer.runtime.NativeCall}, and is fairly expensive to create,
      * so when possible, the interpreter attempts to use a plain call frame instead.
      *
      * @return true if this function needs activation. It could be needed if there is a lexical
