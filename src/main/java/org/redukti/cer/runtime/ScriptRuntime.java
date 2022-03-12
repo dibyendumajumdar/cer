@@ -124,10 +124,10 @@ public class ScriptRuntime {
             StringClass = Kit.classOrNull("java.lang.String"),
             DateClass = Kit.classOrNull("java.util.Date"),
             BigIntegerClass = Kit.classOrNull("java.math.BigInteger");
-    public static final Class<?> ContextClass = Kit.classOrNull("org.mozilla.javascript.Context"),
+    public static final Class<?> ContextClass = Kit.classOrNull("org.redukti.cer.runtime.Context"),
             ContextFactoryClass = Kit.classOrNull("org.redukti.cer.runtime.ContextFactory"),
-            FunctionClass = Kit.classOrNull("org.mozilla.javascript.Function"),
-            ScriptableObjectClass = Kit.classOrNull("org.mozilla.javascript.ScriptableObject");
+            FunctionClass = Kit.classOrNull("org.redukti.cer.runtime.Function"),
+            ScriptableObjectClass = Kit.classOrNull("org.redukti.cer.runtime.ScriptableObject");
     public static final Class<Scriptable> ScriptableClass = Scriptable.class;
 
     private static final Object LIBRARY_SCOPE_KEY = "LIBRARY_SCOPE";
@@ -200,9 +200,9 @@ public class ScriptRuntime {
 
         // define lazy-loaded properties using their class name
         new LazilyLoadedCtor(
-                scope, "RegExp", "org.mozilla.javascript.regexp.NativeRegExp", sealed, true);
+                scope, "RegExp", "org.redukti.cer.runtime.regexp.NativeRegExp", sealed, true);
         new LazilyLoadedCtor(
-                scope, "Continuation", "org.mozilla.javascript.NativeContinuation", sealed, true);
+                scope, "Continuation", "org.redukti.cer.runtime.NativeContinuation", sealed, true);
 
         if (withXml) {
 //            String xmlImpl = cx.getE4xImplementationFactory().getImplementationClassName();
@@ -218,67 +218,67 @@ public class ScriptRuntime {
             new LazilyLoadedCtor(
                     scope,
                     "ArrayBuffer",
-                    "org.mozilla.javascript.typedarrays.NativeArrayBuffer",
+                    "org.redukti.cer.runtime.typedarrays.NativeArrayBuffer",
                     sealed,
                     true);
             new LazilyLoadedCtor(
                     scope,
                     "Int8Array",
-                    "org.mozilla.javascript.typedarrays.NativeInt8Array",
+                    "org.redukti.cer.runtime.typedarrays.NativeInt8Array",
                     sealed,
                     true);
             new LazilyLoadedCtor(
                     scope,
                     "Uint8Array",
-                    "org.mozilla.javascript.typedarrays.NativeUint8Array",
+                    "org.redukti.cer.runtime.typedarrays.NativeUint8Array",
                     sealed,
                     true);
             new LazilyLoadedCtor(
                     scope,
                     "Uint8ClampedArray",
-                    "org.mozilla.javascript.typedarrays.NativeUint8ClampedArray",
+                    "org.redukti.cer.runtime.typedarrays.NativeUint8ClampedArray",
                     sealed,
                     true);
             new LazilyLoadedCtor(
                     scope,
                     "Int16Array",
-                    "org.mozilla.javascript.typedarrays.NativeInt16Array",
+                    "org.redukti.cer.runtime.typedarrays.NativeInt16Array",
                     sealed,
                     true);
             new LazilyLoadedCtor(
                     scope,
                     "Uint16Array",
-                    "org.mozilla.javascript.typedarrays.NativeUint16Array",
+                    "org.redukti.cer.runtime.typedarrays.NativeUint16Array",
                     sealed,
                     true);
             new LazilyLoadedCtor(
                     scope,
                     "Int32Array",
-                    "org.mozilla.javascript.typedarrays.NativeInt32Array",
+                    "org.redukti.cer.runtime.typedarrays.NativeInt32Array",
                     sealed,
                     true);
             new LazilyLoadedCtor(
                     scope,
                     "Uint32Array",
-                    "org.mozilla.javascript.typedarrays.NativeUint32Array",
+                    "org.redukti.cer.runtime.typedarrays.NativeUint32Array",
                     sealed,
                     true);
             new LazilyLoadedCtor(
                     scope,
                     "Float32Array",
-                    "org.mozilla.javascript.typedarrays.NativeFloat32Array",
+                    "org.redukti.cer.runtime.typedarrays.NativeFloat32Array",
                     sealed,
                     true);
             new LazilyLoadedCtor(
                     scope,
                     "Float64Array",
-                    "org.mozilla.javascript.typedarrays.NativeFloat64Array",
+                    "org.redukti.cer.runtime.typedarrays.NativeFloat64Array",
                     sealed,
                     true);
             new LazilyLoadedCtor(
                     scope,
                     "DataView",
-                    "org.mozilla.javascript.typedarrays.NativeDataView",
+                    "org.redukti.cer.runtime.typedarrays.NativeDataView",
                     sealed,
                     true);
         }
@@ -307,16 +307,16 @@ public class ScriptRuntime {
         ScriptableObject s = initSafeStandardObjects(cx, scope, sealed);
 
         new LazilyLoadedCtor(
-                s, "Packages", "org.mozilla.javascript.NativeJavaTopPackage", sealed, true);
+                s, "Packages", "org.redukti.cer.runtime.NativeJavaTopPackage", sealed, true);
         new LazilyLoadedCtor(
-                s, "getClass", "org.mozilla.javascript.NativeJavaTopPackage", sealed, true);
-        new LazilyLoadedCtor(s, "JavaAdapter", "org.mozilla.javascript.JavaAdapter", sealed, true);
+                s, "getClass", "org.redukti.cer.runtime.NativeJavaTopPackage", sealed, true);
+        new LazilyLoadedCtor(s, "JavaAdapter", "org.redukti.cer.runtime.JavaAdapter", sealed, true);
         new LazilyLoadedCtor(
-                s, "JavaImporter", "org.mozilla.javascript.ImporterTopLevel", sealed, true);
+                s, "JavaImporter", "org.redukti.cer.runtime.ImporterTopLevel", sealed, true);
 
         for (String packageName : getTopPackageNames()) {
             new LazilyLoadedCtor(
-                    s, packageName, "org.mozilla.javascript.NativeJavaTopPackage", sealed, true);
+                    s, packageName, "org.redukti.cer.runtime.NativeJavaTopPackage", sealed, true);
         }
 
         return s;
@@ -3818,7 +3818,7 @@ public class ScriptRuntime {
     // ------------------
 
     public static ScriptableObject getGlobal(Context cx) {
-        final String GLOBAL_CLASS = "org.mozilla.javascript.tools.shell.Global";
+        final String GLOBAL_CLASS = "org.redukti.cer.runtime.tools.shell.Global";
         Class<?> globalClass = Kit.classOrNull(GLOBAL_CLASS);
         if (globalClass != null) {
             try {
@@ -4523,7 +4523,7 @@ public class ScriptRuntime {
     private static class DefaultMessageProvider implements MessageProvider {
         @Override
         public String getMessage(String messageId, Object[] arguments) {
-            final String defaultResource = "org.mozilla.javascript.resources.Messages";
+            final String defaultResource = "org.redukti.cer.runtime.resources.Messages";
 
             Context cx = Context.getCurrentContext();
             Locale locale = cx != null ? cx.getLocale() : Locale.getDefault();

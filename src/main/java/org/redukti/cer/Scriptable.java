@@ -22,7 +22,7 @@ import org.redukti.cer.utils.UniqueTag;
  *
  * <p>
  *
- * @see org.mozilla.javascript.ScriptableObject
+ * @see org.redukti.cer.runtime.ScriptableObject
  * @author Norris Boyd
  * @author Nick Thompson
  * @author Brendan Eich
@@ -68,7 +68,7 @@ public interface Scriptable {
      *   <LI>java.lang.Boolean objects
      *   <LI>java.lang.String objects
      *   <LI>java.lang.Number objects
-     *   <LI>org.mozilla.javascript.Scriptable objects
+     *   <LI>org.redukti.cer.runtime.Scriptable objects
      *   <LI>null
      *   <LI>The value returned by Context.getUndefinedValue()
      *   <LI>NOT_FOUND
@@ -77,7 +77,7 @@ public interface Scriptable {
      * @param name the name of the property
      * @param start the object in which the lookup began
      * @return the value of the property (may be null), or NOT_FOUND
-     * @see org.mozilla.javascript.Context#getUndefinedValue
+     * @see org.redukti.cer.runtime.Context#getUndefinedValue
      */
     public Object get(String name, Scriptable start);
 
@@ -90,7 +90,7 @@ public interface Scriptable {
      * @param index the numeric index for the property
      * @param start the object in which the lookup began
      * @return the value of the property (may be null), or NOT_FOUND
-     * @see org.mozilla.javascript.Scriptable#get(String,Scriptable)
+     * @see org.redukti.cer.runtime.Scriptable#get(String,Scriptable)
      */
     public Object get(int index, Scriptable start);
 
@@ -106,8 +106,8 @@ public interface Scriptable {
      * @param name the name of the property
      * @param start the object in which the lookup began
      * @return true if and only if the named property is found in the object
-     * @see org.mozilla.javascript.Scriptable#get(String, Scriptable)
-     * @see org.mozilla.javascript.ScriptableObject#getProperty(Scriptable, String)
+     * @see org.redukti.cer.runtime.Scriptable#get(String, Scriptable)
+     * @see org.redukti.cer.runtime.ScriptableObject#getProperty(Scriptable, String)
      */
     public boolean has(String name, Scriptable start);
 
@@ -123,8 +123,8 @@ public interface Scriptable {
      * @param index the numeric index for the property
      * @param start the object in which the lookup began
      * @return true if and only if the indexed property is found in the object
-     * @see org.mozilla.javascript.Scriptable#get(int, Scriptable)
-     * @see org.mozilla.javascript.ScriptableObject#getProperty(Scriptable, int)
+     * @see org.redukti.cer.runtime.Scriptable#get(int, Scriptable)
+     * @see org.redukti.cer.runtime.ScriptableObject#getProperty(Scriptable, int)
      */
     public boolean has(int index, Scriptable start);
 

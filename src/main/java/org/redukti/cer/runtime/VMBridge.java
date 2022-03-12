@@ -20,7 +20,7 @@ public abstract class VMBridge {
 
     private static VMBridge makeInstance() {
         String[] classNames = {
-            "org.mozilla.javascript.VMBridge_custom", "org.mozilla.javascript.jdk18.VMBridge_jdk18",
+            "org.redukti.cer.runtime.VMBridge_custom", "org.redukti.cer.runtime.jdk18.VMBridge_jdk18",
         };
         for (int i = 0; i != classNames.length; ++i) {
             String className = classNames[i];

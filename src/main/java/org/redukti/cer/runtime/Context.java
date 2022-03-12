@@ -509,16 +509,16 @@ public class Context implements RuntimeContext, Closeable, Versions {
 
     /**
      * @deprecated
-     * @see ContextFactory#addListener(org.mozilla.javascript.ContextFactory.Listener)
+     * @see ContextFactory#addListener(org.redukti.cer.runtime.ContextFactory.Listener)
      * @see ContextFactory#getGlobal()
      */
     @Deprecated
     public static void addContextListener(ContextListener listener) {
         // Special workaround for the debugger
-        String DBG = "org.mozilla.javascript.tools.debugger.Main";
+        String DBG = "org.redukti.cer.runtime.tools.debugger.Main";
         if (DBG.equals(listener.getClass().getName())) {
             Class<?> cl = listener.getClass();
-            Class<?> factoryClass = Kit.classOrNull("org.mozilla.javascript.ContextFactory");
+            Class<?> factoryClass = Kit.classOrNull("org.redukti.cer.runtime.ContextFactory");
             Class<?>[] sig = {factoryClass};
             Object[] args = {ContextFactory.getGlobal()};
             try {
@@ -535,7 +535,7 @@ public class Context implements RuntimeContext, Closeable, Versions {
 
     /**
      * @deprecated
-     * @see ContextFactory#removeListener(org.mozilla.javascript.ContextFactory.Listener)
+     * @see ContextFactory#removeListener(org.redukti.cer.runtime.ContextFactory.Listener)
      * @see ContextFactory#getGlobal()
      */
     @Deprecated
@@ -675,7 +675,7 @@ public class Context implements RuntimeContext, Closeable, Versions {
     /**
      * Get the current error reporter.
      *
-     * @see org.mozilla.javascript.ErrorReporter
+     * @see org.redukti.cer.runtime.ErrorReporter
      */
     public final ErrorReporter getErrorReporter() {
         if (errorReporter == null) {
@@ -688,7 +688,7 @@ public class Context implements RuntimeContext, Closeable, Versions {
      * Change the current error reporter.
      *
      * @return the previous error reporter
-     * @see org.mozilla.javascript.ErrorReporter
+     * @see org.redukti.cer.runtime.ErrorReporter
      */
     public final ErrorReporter setErrorReporter(ErrorReporter reporter) {
         if (sealed) onSealedMutation();
@@ -816,7 +816,7 @@ public class Context implements RuntimeContext, Closeable, Versions {
      * @param lineno the starting line number
      * @param lineSource the text of the line (may be null)
      * @param lineOffset the offset into lineSource where problem was detected
-     * @see org.mozilla.javascript.ErrorReporter
+     * @see org.redukti.cer.runtime.ErrorReporter
      */
     public static void reportWarning(
             String message, String sourceName, int lineno, String lineSource, int lineOffset) {
@@ -830,7 +830,7 @@ public class Context implements RuntimeContext, Closeable, Versions {
      * Report a warning using the error reporter for the current thread.
      *
      * @param message the warning message to report
-     * @see org.mozilla.javascript.ErrorReporter
+     * @see org.redukti.cer.runtime.ErrorReporter
      */
     public static void reportWarning(String message) {
         int[] linep = {0};
@@ -857,7 +857,7 @@ public class Context implements RuntimeContext, Closeable, Versions {
      * @param lineno the starting line number
      * @param lineSource the text of the line (may be null)
      * @param lineOffset the offset into lineSource where problem was detected
-     * @see org.mozilla.javascript.ErrorReporter
+     * @see org.redukti.cer.runtime.ErrorReporter
      */
     public static void reportError(
             String message, String sourceName, int lineno, String lineSource, int lineOffset) {
@@ -873,7 +873,7 @@ public class Context implements RuntimeContext, Closeable, Versions {
      * Report an error using the error reporter for the current thread.
      *
      * @param message the error message to report
-     * @see org.mozilla.javascript.ErrorReporter
+     * @see org.redukti.cer.runtime.ErrorReporter
      */
     public static void reportError(String message) {
         int[] linep = {0};
@@ -890,7 +890,7 @@ public class Context implements RuntimeContext, Closeable, Versions {
      * @param lineSource the text of the line (may be null)
      * @param lineOffset the offset into lineSource where problem was detected
      * @return a runtime exception that will be thrown to terminate the execution of the script
-     * @see org.mozilla.javascript.ErrorReporter
+     * @see org.redukti.cer.runtime.ErrorReporter
      */
     public static EvaluatorException reportRuntimeError(
             String message, String sourceName, int lineno, String lineSource, int lineOffset) {
@@ -948,7 +948,7 @@ public class Context implements RuntimeContext, Closeable, Versions {
      * Report a runtime error using the error reporter for the current thread.
      *
      * @param message the error message to report
-     * @see org.mozilla.javascript.ErrorReporter
+     * @see org.redukti.cer.runtime.ErrorReporter
      */
     public static EvaluatorException reportRuntimeError(String message) {
         int[] linep = {0};
@@ -1121,7 +1121,7 @@ public class Context implements RuntimeContext, Closeable, Versions {
      *     origin or owner of the script. For implementations that don't care about security, this
      *     value may be null.
      * @return the result of evaluating the string
-     * @see org.mozilla.javascript.SecurityController
+     * @see org.redukti.cer.runtime.SecurityController
      */
     public final Object evaluateString(
             Scriptable scope, String source, String sourceName, int lineno, Object securityDomain) {
@@ -1324,7 +1324,7 @@ public class Context implements RuntimeContext, Closeable, Versions {
      *     value may be null.
      * @return a script that may later be executed
      * @exception IOException if an IOException was generated by the Reader
-     * @see org.mozilla.javascript.Script
+     * @see org.redukti.cer.runtime.Script
      */
     public final Script compileReader(
             Reader in, String sourceName, int lineno, Object securityDomain) throws IOException {
@@ -1358,7 +1358,7 @@ public class Context implements RuntimeContext, Closeable, Versions {
      *     origin or owner of the script. For implementations that don't care about security, this
      *     value may be null.
      * @return a script that may later be executed
-     * @see org.mozilla.javascript.Script
+     * @see org.redukti.cer.runtime.Script
      */
     public final Script compileString(
             String source, String sourceName, int lineno, Object securityDomain) {
@@ -1407,7 +1407,7 @@ public class Context implements RuntimeContext, Closeable, Versions {
      *     origin or owner of the script. For implementations that don't care about security, this
      *     value may be null.
      * @return a Function that may later be called
-     * @see org.mozilla.javascript.Function
+     * @see org.redukti.cer.runtime.Function
      */
     public final Function compileFunction(
             Scriptable scope, String source, String sourceName, int lineno, Object securityDomain) {
@@ -2505,9 +2505,9 @@ public class Context implements RuntimeContext, Closeable, Versions {
     }
 
     private static Class<?> codegenClass =
-            Kit.classOrNull("org.mozilla.javascript.optimizer.Codegen");
+            Kit.classOrNull("org.redukti.cer.runtime.optimizer.Codegen");
     private static Class<?> interpreterClass =
-            Kit.classOrNull("org.mozilla.javascript.Interpreter");
+            Kit.classOrNull("org.redukti.cer.runtime.Interpreter");
 
     private Evaluator createCompiler() {
         Evaluator result = null;
@@ -2552,7 +2552,7 @@ public class Context implements RuntimeContext, Closeable, Versions {
 
     public RegExpProxy getRegExpProxy() {
         if (regExpProxy == null) {
-            Class<?> cl = Kit.classOrNull("org.mozilla.javascript.regexp.RegExpImpl");
+            Class<?> cl = Kit.classOrNull("org.redukti.cer.runtime.regexp.RegExpImpl");
             if (cl != null) {
                 regExpProxy = (RegExpProxy) Kit.newInstanceOrNull(cl);
             }
