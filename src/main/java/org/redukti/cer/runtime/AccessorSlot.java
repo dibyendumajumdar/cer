@@ -1,6 +1,7 @@
 package org.redukti.cer.runtime;
 
 import org.redukti.cer.Scriptable;
+import org.redukti.cer.ir.InterpreterConstants;
 
 /**
  * This is a specialization of Slot to store various types of values that are retrieved dynamically
@@ -102,7 +103,7 @@ public class AccessorSlot extends Slot {
         @Override
         public Object getValue(Scriptable start) {
             if (member.delegateTo == null) {
-                return member.invoke(start, ScriptRuntime.emptyArgs);
+                return member.invoke(start, InterpreterConstants.emptyArgs);
             }
             return member.invoke(member.delegateTo, new Object[] {start});
         }
@@ -127,7 +128,7 @@ public class AccessorSlot extends Slot {
             if (target instanceof Function) {
                 Function t = (Function) target;
                 Context cx = Context.getContext();
-                return t.call(cx, t.getParentScope(), start, ScriptRuntime.emptyArgs);
+                return t.call(cx, t.getParentScope(), start, InterpreterConstants.emptyArgs);
             }
             return Undefined.instance;
         }

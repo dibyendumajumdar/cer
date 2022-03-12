@@ -19,6 +19,7 @@ import org.redukti.cer.exception.EvaluatorException;
 import org.redukti.cer.exception.RhinoException;
 import org.redukti.cer.ir.Decompiler;
 import org.redukti.cer.ir.IRFactory;
+import org.redukti.cer.ir.InterpreterConstants;
 import org.redukti.cer.parser.DefaultErrorReporter;
 import org.redukti.cer.parser.ErrorReporter;
 import org.redukti.cer.parser.Parser;
@@ -312,7 +313,7 @@ public class Context implements RuntimeContext, Closeable, Versions {
     public static final String errorReporterProperty = "error reporter";
 
     /** Convenient value to use as zero-length array of objects. */
-    public static final Object[] emptyArgs = ScriptRuntime.emptyArgs;
+    public static final Object[] emptyArgs = InterpreterConstants.emptyArgs;
 
     /**
      * Creates a new Context. The context will be associated with the {@link
@@ -1178,7 +1179,7 @@ public class Context implements RuntimeContext, Closeable, Versions {
                             + " a script or was not created by interpreted mode ");
         }
         return callFunctionWithContinuations(
-                (InterpretedFunction) script, scope, ScriptRuntime.emptyArgs);
+                (InterpretedFunction) script, scope, InterpreterConstants.emptyArgs);
     }
 
     /**
@@ -1247,6 +1248,25 @@ public class Context implements RuntimeContext, Closeable, Versions {
                 (NativeContinuation) continuation, this, scope, args);
     }
 
+    public void initFromContext(CompilerEnvirons env) {
+        env.setErrorReporter(getErrorReporter());
+        env.languageVersion = getLanguageVersion();
+        env.generateDebugInfo = (!isGeneratingDebugChanged() || isGeneratingDebug());
+        env.reservedKeywordAsIdentifier = hasFeature(Context.FEATURE_RESERVED_KEYWORD_AS_IDENTIFIER);
+        env.allowMemberExprAsFunctionName = hasFeature(Context.FEATURE_MEMBER_EXPR_AS_FUNCTION_NAME);
+        env.strictMode = hasFeature(Context.FEATURE_STRICT_MODE);
+        env.warningAsError = hasFeature(Context.FEATURE_WARNING_AS_ERROR);
+        env.xmlAvailable = hasFeature(Context.FEATURE_E4X);
+
+        env.optimizationLevel = getOptimizationLevel();
+
+        env.generatingSource = isGeneratingSource();
+        env.activationNames = activationNames;
+
+        // Observer code generation in compiled code :
+        env.generateObserverCount = generateObserverCount;
+    }
+
     /**
      * Check whether a string is ready to be compiled.
      *
@@ -1264,7 +1284,7 @@ public class Context implements RuntimeContext, Closeable, Versions {
     public final boolean stringIsCompilableUnit(String source) {
         boolean errorseen = false;
         CompilerEnvirons compilerEnv = new CompilerEnvirons();
-        compilerEnv.initFromContext(this);
+        initFromContext(compilerEnv);
         // no source name or source text manager, because we're just
         // going to throw away the result.
         compilerEnv.setGeneratingSource(false);
@@ -1496,7 +1516,7 @@ public class Context implements RuntimeContext, Closeable, Versions {
      * @return the new object
      */
     public Scriptable newObject(Scriptable scope, String constructorName) {
-        return newObject(scope, constructorName, ScriptRuntime.emptyArgs);
+        return newObject(scope, constructorName, InterpreterConstants.emptyArgs);
     }
 
     /**
@@ -2270,7 +2290,7 @@ public class Context implements RuntimeContext, Closeable, Versions {
             ClassLoader loader = f.getApplicationClassLoader();
             if (loader == null) {
                 ClassLoader threadLoader = Thread.currentThread().getContextClassLoader();
-                if (threadLoader != null && Kit.testIfCanLoadRhinoClasses(threadLoader)) {
+                if (threadLoader != null && KitEx.testIfCanLoadRhinoClasses(threadLoader)) {
                     // Thread.getContextClassLoader is not cached since
                     // its caching prevents it from GC which may lead to
                     // a memory leak and hides updates to
@@ -2299,7 +2319,7 @@ public class Context implements RuntimeContext, Closeable, Versions {
             applicationClassLoader = null;
             return;
         }
-        if (!Kit.testIfCanLoadRhinoClasses(loader)) {
+        if (!KitEx.testIfCanLoadRhinoClasses(loader)) {
             throw new IllegalArgumentException("Loader can not resolve Rhino classes");
         }
         applicationClassLoader = loader;
@@ -2384,7 +2404,7 @@ public class Context implements RuntimeContext, Closeable, Versions {
         if (!(scope == null ^ returnFunction)) Kit.codeBug();
 
         CompilerEnvirons compilerEnv = new CompilerEnvirons();
-        compilerEnv.initFromContext(this);
+        initFromContext(compilerEnv);
         if (compilationErrorReporter == null) {
             compilationErrorReporter = compilerEnv.getErrorReporter();
         }

@@ -21,13 +21,13 @@ import java.util.regex.Pattern;
 public abstract class RhinoException extends RuntimeException {
     private static final Pattern JAVA_STACK_PATTERN = Pattern.compile("_c_(.*)_\\d+");
 
-    RhinoException() {
+    public RhinoException() {
 // FIXME (dibyendu)
 //        Evaluator e = Context.createInterpreter();
 //        if (e != null) e.captureStackInfo(this);
     }
 
-    RhinoException(String details) {
+    public RhinoException(String details) {
         super(details);
         // FIXME (dibyendu)
         //        Evaluator e = Context.createInterpreter();
@@ -189,7 +189,7 @@ public abstract class RhinoException extends RuntimeException {
         return formatStackTrace(stack, details());
     }
 
-    static String formatStackTrace(ScriptStackElement[] stack, String message) {
+    public static String formatStackTrace(ScriptStackElement[] stack, String message) {
         StringBuilder buffer = new StringBuilder();
         //String lineSeparator = SecurityUtilities.getSystemProperty("line.separator");
         String lineSeparator = System.lineSeparator();

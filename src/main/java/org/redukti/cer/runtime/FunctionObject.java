@@ -15,6 +15,7 @@ import java.lang.reflect.Member;
 import java.lang.reflect.Method;
 import java.lang.reflect.Modifier;
 import org.redukti.cer.Scriptable;
+import org.redukti.cer.ir.InterpreterConstants;
 
 public class FunctionObject extends BaseFunction {
     private static final long serialVersionUID = -5332312783643935019L;
@@ -358,7 +359,8 @@ public class FunctionObject extends BaseFunction {
                 }
                 if (!clazz.isInstance(thisObj)) {
                     boolean compatible = false;
-                    if (thisObj == scope || thisObj instanceof ModuleScope) {
+                    // FIX (dibyendu)
+                    if (thisObj == scope /* || thisObj instanceof ModuleScope*/) {
                         Scriptable parentScope = getParentScope();
                         if (scope != parentScope) {
                             // Call with dynamic scope for standalone function,
@@ -392,7 +394,7 @@ public class FunctionObject extends BaseFunction {
                     }
                 }
             } else if (parmsLength == 0) {
-                invokeArgs = ScriptRuntime.emptyArgs;
+                invokeArgs = InterpreterConstants.emptyArgs;
             } else {
                 invokeArgs = new Object[parmsLength];
                 for (int i = 0; i != parmsLength; ++i) {

@@ -363,7 +363,7 @@ public class ContextFactory {
      */
     public final void initApplicationClassLoader(ClassLoader loader) {
         if (loader == null) throw new IllegalArgumentException("loader is null");
-        if (!Kit.testIfCanLoadRhinoClasses(loader))
+        if (!KitEx.testIfCanLoadRhinoClasses(loader))
             throw new IllegalArgumentException("Loader can not resolve Rhino classes");
 
         if (this.applicationClassLoader != null)

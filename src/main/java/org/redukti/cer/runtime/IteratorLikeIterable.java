@@ -5,6 +5,7 @@
 package org.redukti.cer.runtime;
 
 import org.redukti.cer.Scriptable;
+import org.redukti.cer.ir.InterpreterConstants;
 
 import java.io.Closeable;
 import java.util.Iterator;
@@ -53,7 +54,7 @@ public class IteratorLikeIterable implements Iterable<Object>, Closeable {
         if (!closed) {
             closed = true;
             if (returnFunc != null) {
-                returnFunc.call(cx, scope, iterator, ScriptRuntime.emptyArgs);
+                returnFunc.call(cx, scope, iterator, InterpreterConstants.emptyArgs);
             }
         }
     }
@@ -72,7 +73,7 @@ public class IteratorLikeIterable implements Iterable<Object>, Closeable {
             if (isDone) {
                 return false;
             }
-            Object val = next.call(cx, scope, iterator, ScriptRuntime.emptyArgs);
+            Object val = next.call(cx, scope, iterator, InterpreterConstants.emptyArgs);
             // This will throw if "val" is not an object.
             // "getObjectPropNoWarn" won't, so do this as follows.
             Object doneval =

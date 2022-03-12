@@ -19,6 +19,7 @@ import java.util.function.BiConsumer;
 import org.redukti.cer.Scriptable;
 import org.redukti.cer.exception.EvaluatorException;
 import org.redukti.cer.exception.RhinoException;
+import org.redukti.cer.ir.InterpreterConstants;
 import org.redukti.cer.parser.*;
 import org.redukti.cer.parser.ast.FunctionNode;
 import org.redukti.cer.runtime.support.DToA;
@@ -1103,7 +1104,7 @@ public class ScriptRuntime {
                 Object v = ScriptableObject.getProperty(obj, "toSource");
                 if (v instanceof Function) {
                     Function f = (Function) v;
-                    return toString(f.call(cx, scope, obj, emptyArgs));
+                    return toString(f.call(cx, scope, obj, InterpreterConstants.emptyArgs));
                 }
             }
             return toString(value);
@@ -1293,7 +1294,7 @@ public class ScriptRuntime {
         scope = ScriptableObject.getTopLevelScope(scope);
         Function ctor = getExistingCtor(cx, scope, constructorName);
         if (args == null) {
-            args = ScriptRuntime.emptyArgs;
+            args = InterpreterConstants.emptyArgs;
         }
         return ctor.construct(cx, scope, args);
     }
@@ -1303,7 +1304,7 @@ public class ScriptRuntime {
         scope = ScriptableObject.getTopLevelScope(scope);
         Function ctor = TopLevel.getBuiltinCtor(cx, scope, type);
         if (args == null) {
-            args = ScriptRuntime.emptyArgs;
+            args = InterpreterConstants.emptyArgs;
         }
         return ctor.construct(cx, scope, args);
     }
@@ -1313,7 +1314,7 @@ public class ScriptRuntime {
         scope = ScriptableObject.getTopLevelScope(scope);
         Function ctor = TopLevel.getNativeErrorCtor(cx, scope, type);
         if (args == null) {
-            args = ScriptRuntime.emptyArgs;
+            args = InterpreterConstants.emptyArgs;
         }
         return ctor.construct(cx, scope, args);
     }
@@ -2309,7 +2310,7 @@ public class ScriptRuntime {
             Callable f = (Callable) v;
             Context cx = Context.getContext();
             try {
-                x.currentId = f.call(cx, x.iterator.getParentScope(), x.iterator, emptyArgs);
+                x.currentId = f.call(cx, x.iterator.getParentScope(), x.iterator, InterpreterConstants.emptyArgs);
                 return Boolean.TRUE;
             } catch (JavaScriptException e) {
                 if (e.getValue() instanceof NativeIterator.StopIteration) {
@@ -2355,7 +2356,7 @@ public class ScriptRuntime {
         Callable f = (Callable) v;
         Context cx = Context.getContext();
         Scriptable scope = enumObj.iterator.getParentScope();
-        Object r = f.call(cx, scope, enumObj.iterator, emptyArgs);
+        Object r = f.call(cx, scope, enumObj.iterator, InterpreterConstants.emptyArgs);
         Scriptable iteratorResult = toObject(cx, scope, r);
         Object done = ScriptableObject.getProperty(iteratorResult, ES6Iterator.DONE_PROPERTY);
         if (done != Scriptable.NOT_FOUND && toBoolean(done)) {
@@ -2639,7 +2640,7 @@ public class ScriptRuntime {
         final Callable getIterator =
                 ScriptRuntime.getElemFunctionAndThis(obj, SymbolKey.ITERATOR, cx, scope);
         final Scriptable iterable = ScriptRuntime.lastStoredScriptable(cx);
-        return getIterator.call(cx, scope, iterable, ScriptRuntime.emptyArgs);
+        return getIterator.call(cx, scope, iterable, InterpreterConstants.emptyArgs);
     }
 
     /**
@@ -2760,11 +2761,11 @@ public class ScriptRuntime {
         Object[] callArgs;
         if (isApply) {
             // Follow Ecma 15.3.4.3
-            callArgs = L <= 1 ? ScriptRuntime.emptyArgs : getApplyArguments(cx, args[1]);
+            callArgs = L <= 1 ? InterpreterConstants.emptyArgs : getApplyArguments(cx, args[1]);
         } else {
             // Follow Ecma 15.3.4.4
             if (L <= 1) {
-                callArgs = ScriptRuntime.emptyArgs;
+                callArgs = InterpreterConstants.emptyArgs;
             } else {
                 callArgs = new Object[L - 1];
                 System.arraycopy(args, 1, callArgs, 0, L - 1);
@@ -2784,11 +2785,11 @@ public class ScriptRuntime {
 
     static Object[] getApplyArguments(Context cx, Object arg1) {
         if (arg1 == null || Undefined.isUndefined(arg1)) {
-            return ScriptRuntime.emptyArgs;
+            return InterpreterConstants.emptyArgs;
         } else if (arg1 instanceof Scriptable && isArrayLike((Scriptable) arg1)) {
             return cx.getElements((Scriptable) arg1);
         } else if (arg1 instanceof ScriptableObject) {
-            return ScriptRuntime.emptyArgs;
+            return InterpreterConstants.emptyArgs;
         } else {
             throw ScriptRuntime.typeErrorById("msg.arg.isnt.array");
         }
@@ -2857,7 +2858,7 @@ public class ScriptRuntime {
         Script script = cx.compileString(x.toString(), evaluator, reporter, sourceName, 1, null);
         evaluator.setEvalScriptFlag(script);
         Callable c = (Callable) script;
-        return c.call(cx, scope, (Scriptable) thisArg, ScriptRuntime.emptyArgs);
+        return c.call(cx, scope, (Scriptable) thisArg, InterpreterConstants.emptyArgs);
     }
 
     /** The typeof operator */
@@ -4431,7 +4432,7 @@ public class ScriptRuntime {
         }
         int len = (int) longLen;
         if (len == 0) {
-            return ScriptRuntime.emptyArgs;
+            return InterpreterConstants.emptyArgs;
         }
         Object[] result = new Object[len];
         for (int i = 0; i < len; i++) {
@@ -4908,6 +4909,5 @@ public class ScriptRuntime {
         return new JavaScriptException(error, filename, linep[0]);
     }
 
-    public static final Object[] emptyArgs = new Object[0];
     public static final String[] emptyStrings = new String[0];
 }

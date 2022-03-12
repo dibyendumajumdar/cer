@@ -6,6 +6,7 @@ package org.redukti.cer.runtime;
 
 import org.redukti.cer.Scriptable;
 import org.redukti.cer.exception.RhinoException;
+import org.redukti.cer.ir.InterpreterConstants;
 
 import java.util.ArrayList;
 
@@ -387,7 +388,7 @@ public class NativePromise extends ScriptableObject {
                                     cx,
                                     ls,
                                     Undefined.SCRIPTABLE_UNDEFINED,
-                                    ScriptRuntime.emptyArgs);
+                                    InterpreterConstants.emptyArgs);
                     Object promise = resolveInternal(cx, scope, constructor, result);
                     Callable thenFunc =
                             ScriptRuntime.getPropFunctionAndThis(promise, "then", cx, scope);
@@ -419,7 +420,7 @@ public class NativePromise extends ScriptableObject {
                                     cx,
                                     ls,
                                     Undefined.SCRIPTABLE_UNDEFINED,
-                                    ScriptRuntime.emptyArgs);
+                                    InterpreterConstants.emptyArgs);
                     Object promise = resolveInternal(cx, scope, constructor, result);
                     Callable thenFunc =
                             ScriptRuntime.getPropFunctionAndThis(promise, "then", cx, scope);

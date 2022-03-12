@@ -17,6 +17,7 @@ import java.util.NoSuchElementException;
 import java.util.Set;
 import org.redukti.cer.Scriptable;
 import org.redukti.cer.exception.EvaluatorException;
+import org.redukti.cer.ir.InterpreterConstants;
 
 /**
  * This class implements the Object native object. See ECMA 15.2.
@@ -170,7 +171,7 @@ public class NativeObject extends IdScriptableObject implements Map {
                         throw ScriptRuntime.notFunctionError(toString);
                     }
                     Callable fun = (Callable) toString;
-                    return fun.call(cx, scope, thisObj, ScriptRuntime.emptyArgs);
+                    return fun.call(cx, scope, thisObj, InterpreterConstants.emptyArgs);
                 }
 
             case Id_toString:

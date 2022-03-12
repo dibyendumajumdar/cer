@@ -17,7 +17,7 @@ import org.redukti.cer.exception.RhinoException;
  *
  * @author Mike McCabe
  */
-public class JavaScriptException extends RhinoException {
+public class JavaScriptException extends ExtendedRhinoException {
     private static final long serialVersionUID = -7666130513694669293L;
 
     /**

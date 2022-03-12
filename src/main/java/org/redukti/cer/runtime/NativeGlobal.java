@@ -8,6 +8,7 @@ package org.redukti.cer.runtime;
 
 import java.io.Serializable;
 import org.redukti.cer.Scriptable;
+import org.redukti.cer.ir.InterpreterConstants;
 import org.redukti.cer.utils.Kit;
 
 import static org.redukti.cer.runtime.ScriptableObject.*;
@@ -109,7 +110,7 @@ public class NativeGlobal implements Serializable, IdFunctionCall {
             ScriptableObject errorProto =
                     (ScriptableObject)
                             ScriptRuntime.newBuiltinObject(
-                                    cx, scope, TopLevel.Builtins.Error, ScriptRuntime.emptyArgs);
+                                    cx, scope, TopLevel.Builtins.Error, InterpreterConstants.emptyArgs);
             errorProto.defineProperty("name", name, DONTENUM);
             errorProto.defineProperty("message", "", DONTENUM);
             IdFunctionObject ctor =

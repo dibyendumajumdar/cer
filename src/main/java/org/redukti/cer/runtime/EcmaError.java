@@ -15,7 +15,7 @@ import org.redukti.cer.exception.RhinoException;
  * The class of exceptions raised by the engine as described in ECMA edition 3. See section 15.11.6
  * in particular.
  */
-public class EcmaError extends RhinoException {
+public class EcmaError extends ExtendedRhinoException {
     private static final long serialVersionUID = -6261226256957286699L;
 
     private String errorName;

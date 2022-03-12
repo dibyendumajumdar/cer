@@ -9,6 +9,7 @@ package org.redukti.cer.runtime;
 
 import org.redukti.cer.Scriptable;
 import org.redukti.cer.debug.DebuggableScript;
+import org.redukti.cer.ir.InterpreterConstants;
 import org.redukti.cer.ir.InterpreterData;
 
 final class InterpretedFunction extends NativeFunction implements Script {
@@ -81,7 +82,7 @@ final class InterpretedFunction extends NativeFunction implements Script {
      * @param cx the current context
      * @param scope the scope used for the call
      * @param thisObj the value of "this"
-     * @param args function arguments. Must not be null. You can use {@link ScriptRuntime#emptyArgs}
+     * @param args function arguments. Must not be null. You can use {@link InterpreterConstants#emptyArgs}
      *     to pass empty arguments.
      * @return the result of the function call.
      */
@@ -104,9 +105,9 @@ final class InterpretedFunction extends NativeFunction implements Script {
             // It will go through "call" path. but they are equivalent
             ret =
                     ScriptRuntime.doTopCall(
-                            this, cx, scope, scope, ScriptRuntime.emptyArgs, idata.isStrict);
+                            this, cx, scope, scope, InterpreterConstants.emptyArgs, idata.isStrict);
         } else {
-            ret = Interpreter.interpret(this, cx, scope, scope, ScriptRuntime.emptyArgs);
+            ret = Interpreter.interpret(this, cx, scope, scope, InterpreterConstants.emptyArgs);
         }
         cx.processMicrotasks();
         return ret;

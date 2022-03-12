@@ -1,5 +1,10 @@
 package org.redukti.cer.utils;
 
+import org.redukti.cer.runtime.Context;
+import org.redukti.cer.runtime.support.DToA;
+import org.redukti.cer.runtime.support.DoubleConversion;
+import org.redukti.cer.runtime.support.FastDtoa;
+
 public class StringUtils {
     public static String escapeString(String s) {
         return escapeString(s, '"');
@@ -147,6 +152,47 @@ public class StringUtils {
             return Integer.valueOf((int) indexTest);
         }
         return s;
+    }
+
+    /**
+     * If d is exact int value, return its value wrapped as Integer and othewise return d converted
+     * to String.
+     */
+    public static Object getIndexObject(double d) {
+        int i = (int) d;
+        if (i == d) {
+            return Integer.valueOf(i);
+        }
+        return toString(d);
+    }
+
+    /** Optimized version of toString(Object) for numbers. */
+    public static String toString(double val) {
+        return numberToString(val, 10);
+    }
+
+    public static String numberToString(double d, int base) {
+        if (Double.isNaN(d)) return "NaN";
+        if (d == Double.POSITIVE_INFINITY) return "Infinity";
+        if (d == Double.NEGATIVE_INFINITY) return "-Infinity";
+        if (d == 0.0) return "0";
+
+        if (base != 10) {
+            return DToA.JS_dtobasestr(base, d);
+        }
+        // V8 FastDtoa can't convert all numbers, so try it first but
+        // fall back to old DToA in case it fails
+        String result = FastDtoa.numberToString(d);
+        if (result != null) {
+            return result;
+        }
+        StringBuilder buffer = new StringBuilder();
+        DToA.JS_dtostr(buffer, DToA.DTOSTR_STANDARD, 0, d);
+        return buffer.toString();
+    }
+
+    public static int toInt32(double d) {
+        return DoubleConversion.doubleToInt32(d);
     }
 
 }

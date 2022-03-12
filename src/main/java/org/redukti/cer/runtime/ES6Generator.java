@@ -8,6 +8,7 @@ package org.redukti.cer.runtime;
 
 import org.redukti.cer.Scriptable;
 import org.redukti.cer.exception.RhinoException;
+import org.redukti.cer.ir.InterpreterConstants;
 
 public final class ES6Generator extends IdScriptableObject {
     private static final long serialVersionUID = 1645892441041347273L;
@@ -127,7 +128,7 @@ public final class ES6Generator extends IdScriptableObject {
             // Be super-careful and only pass an arg to next if it expects one
             Object[] nextArgs =
                     Undefined.instance.equals(value)
-                            ? ScriptRuntime.emptyArgs
+                            ? InterpreterConstants.emptyArgs
                             : new Object[] {value};
 
             Callable nextFn =
@@ -381,7 +382,7 @@ public final class ES6Generator extends IdScriptableObject {
 
     private Object callReturnOptionally(Context cx, Scriptable scope, Object value) {
         Object[] retArgs =
-                Undefined.instance.equals(value) ? ScriptRuntime.emptyArgs : new Object[] {value};
+                Undefined.instance.equals(value) ? InterpreterConstants.emptyArgs : new Object[] {value};
         // Delegate to "return" method. If it's not defined we ignore it
         Object retFnObj =
                 ScriptRuntime.getObjectPropNoWarn(delegee, ES6Iterator.RETURN_METHOD, cx, scope);

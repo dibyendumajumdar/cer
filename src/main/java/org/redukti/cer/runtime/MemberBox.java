@@ -7,6 +7,7 @@
 package org.redukti.cer.runtime;
 
 import org.redukti.cer.Scriptable;
+import org.redukti.cer.ir.InterpreterConstants;
 
 import java.io.IOException;
 import java.io.ObjectInputStream;
@@ -135,7 +136,7 @@ final class MemberBox implements Serializable {
                             Object[] args;
                             if (nativeGetter.delegateTo == null) {
                                 getterThis = thisObj;
-                                args = ScriptRuntime.emptyArgs;
+                                args = InterpreterConstants.emptyArgs;
                             } else {
                                 getterThis = nativeGetter.delegateTo;
                                 args = new Object[] {thisObj};

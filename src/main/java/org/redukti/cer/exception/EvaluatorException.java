@@ -6,8 +6,10 @@
 
 package org.redukti.cer.exception;
 
+import org.redukti.cer.runtime.ExtendedRhinoException;
+
 /** The class of exceptions thrown by the JavaScript engine. */
-public class EvaluatorException extends RhinoException {
+public class EvaluatorException extends ExtendedRhinoException {
     private static final long serialVersionUID = -8743165779676009808L;
 
     public EvaluatorException(String detail) {

@@ -8,6 +8,7 @@ package org.redukti.cer.runtime;
 
 import org.redukti.cer.Scriptable;
 import org.redukti.cer.ir.Decompiler;
+import org.redukti.cer.ir.InterpreterConstants;
 import org.redukti.cer.parser.DefaultErrorReporter;
 import org.redukti.cer.parser.ErrorReporter;
 import org.redukti.cer.utils.Kit;
@@ -347,7 +348,7 @@ public class BaseFunction extends IdScriptableObject implements Function {
                     System.arraycopy(args, 1, boundArgs, 0, argc - 1);
                 } else {
                     boundThis = null;
-                    boundArgs = ScriptRuntime.emptyArgs;
+                    boundArgs = InterpreterConstants.emptyArgs;
                 }
                 return new BoundFunction(cx, scope, targetFunction, boundThis, boundArgs);
         }

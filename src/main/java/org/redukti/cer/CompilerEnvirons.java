@@ -245,21 +245,21 @@ public class CompilerEnvirons {
 
     private ErrorReporter errorReporter;
 
-    private int languageVersion;
-    private boolean generateDebugInfo;
-    private boolean reservedKeywordAsIdentifier;
-    private boolean allowMemberExprAsFunctionName;
-    private boolean xmlAvailable;
-    private int optimizationLevel;
-    private boolean generatingSource;
-    private boolean strictMode;
-    private boolean warningAsError;
-    private boolean generateObserverCount;
+    public int languageVersion;
+    public boolean generateDebugInfo;
+    public boolean reservedKeywordAsIdentifier;
+    public boolean allowMemberExprAsFunctionName;
+    public boolean xmlAvailable;
+    public int optimizationLevel;
+    public boolean generatingSource;
+    public boolean strictMode;
+    public boolean warningAsError;
+    public boolean generateObserverCount;
     private boolean recordingComments;
     private boolean recordingLocalJsDocComments;
     private boolean recoverFromErrors;
     private boolean warnTrailingComma;
     private boolean ideMode;
     private boolean allowSharpComments;
-    Set<String> activationNames;
+    public Set<String> activationNames;
 }

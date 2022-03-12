@@ -29,6 +29,7 @@ import java.util.function.Supplier;
 import org.redukti.cer.Scriptable;
 import org.redukti.cer.annotations.*;
 import org.redukti.cer.debug.DebuggableObject;
+import org.redukti.cer.ir.InterpreterConstants;
 import org.redukti.cer.utils.Kit;
 import org.redukti.cer.utils.ObjToIntMap;
 
@@ -786,7 +787,7 @@ public abstract class ScriptableObject
             if (cx == null) {
                 cx = Context.getContext();
             }
-            v = fun.call(cx, fun.getParentScope(), object, ScriptRuntime.emptyArgs);
+            v = fun.call(cx, fun.getParentScope(), object, InterpreterConstants.emptyArgs);
             if (v != null) {
                 if (!(v instanceof Scriptable)) {
                     return v;
@@ -1041,7 +1042,7 @@ public abstract class ScriptableObject
             throw Context.reportRuntimeErrorById("msg.zero.arg.ctor", clazz.getName());
         }
 
-        Scriptable proto = (Scriptable) protoCtor.newInstance(ScriptRuntime.emptyArgs);
+        Scriptable proto = (Scriptable) protoCtor.newInstance(InterpreterConstants.emptyArgs);
         String className = proto.getClassName();
 
         // check for possible redefinition
@@ -2289,7 +2290,7 @@ public abstract class ScriptableObject
      */
     public static Object[] getPropertyIds(Scriptable obj) {
         if (obj == null) {
-            return ScriptRuntime.emptyArgs;
+            return InterpreterConstants.emptyArgs;
         }
         Object[] result = obj.getIds();
         ObjToIntMap map = null;
@@ -2568,7 +2569,7 @@ public abstract class ScriptableObject
         int externalLen = (externalData == null ? 0 : externalData.getArrayLength());
 
         if (externalLen == 0) {
-            a = ScriptRuntime.emptyArgs;
+            a = InterpreterConstants.emptyArgs;
         } else {
             a = new Object[externalLen];
             for (int i = 0; i < externalLen; i++) {

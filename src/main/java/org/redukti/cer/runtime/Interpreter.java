@@ -22,6 +22,7 @@ import org.redukti.cer.exception.RhinoException;
 import org.redukti.cer.exception.ScriptStackElement;
 import org.redukti.cer.ir.CodeGenerator;
 import org.redukti.cer.ir.Icode;
+import org.redukti.cer.ir.InterpreterConstants;
 import org.redukti.cer.ir.InterpreterData;
 import org.redukti.cer.parser.Node;
 import org.redukti.cer.parser.Token;
@@ -250,7 +251,7 @@ public final class Interpreter extends Icode implements Evaluator {
                                             cx,
                                             top,
                                             top,
-                                            ScriptRuntime.emptyArgs,
+                                            InterpreterConstants.emptyArgs,
                                             isStrictTopFrame()))
                             .booleanValue();
                 } finally {
@@ -1162,7 +1163,7 @@ public final class Interpreter extends Icode implements Evaluator {
                 generatorState = (GeneratorState) throwable;
 
                 // reestablish this call frame
-                enterFrame(cx, frame, ScriptRuntime.emptyArgs, true);
+                enterFrame(cx, frame, InterpreterConstants.emptyArgs, true);
                 throwable = null;
             } else if (!(throwable instanceof ContinuationJump)) {
                 // It should be continuation
@@ -3178,7 +3179,7 @@ public final class Interpreter extends Icode implements Evaluator {
                 // the capturedFrame, not branchFrame
                 --enterCount;
                 x = enterFrames[enterCount];
-                enterFrame(cx, x, ScriptRuntime.emptyArgs, true);
+                enterFrame(cx, x, InterpreterConstants.emptyArgs, true);
             }
 
             // Continuation jump is almost done: capturedFrame
@@ -3276,7 +3277,7 @@ public final class Interpreter extends Icode implements Evaluator {
         if (BaseFunction.isApply(ifun)) {
             Object[] callArgs =
                     indexReg < 2
-                            ? ScriptRuntime.emptyArgs
+                            ? InterpreterConstants.emptyArgs
                             : ScriptRuntime.getApplyArguments(cx, stack[stackTop + 3]);
             calleeFrame =
                     initFrame(
@@ -3638,7 +3639,7 @@ public final class Interpreter extends Icode implements Evaluator {
 
     private static Object[] getArgsArray(Object[] stack, double[] sDbl, int shift, int count) {
         if (count == 0) {
-            return ScriptRuntime.emptyArgs;
+            return InterpreterConstants.emptyArgs;
         }
         Object[] args = new Object[count];
         for (int i = 0; i != count; ++i, ++shift) {

@@ -7,6 +7,7 @@
 package org.redukti.cer.runtime;
 
 import org.redukti.cer.Scriptable;
+import org.redukti.cer.ir.InterpreterConstants;
 import org.redukti.cer.runtime.regexp.NativeRegExp;
 import org.redukti.cer.utils.ObjToIntMap;
 
@@ -746,7 +747,7 @@ public class NativeArray extends IdScriptableObject implements List {
                 final Object[] args =
                         (lengthAlways || (length > 0))
                                 ? new Object[] {Long.valueOf(length)}
-                                : ScriptRuntime.emptyArgs;
+                                : InterpreterConstants.emptyArgs;
                 result = ((Function) arg).construct(cx, scope, args);
             } catch (EcmaError ee) {
                 if (!"TypeError".equals(ee.getName())) {
@@ -1090,7 +1091,7 @@ public class NativeArray extends IdScriptableObject implements List {
                                     ScriptRuntime.getPropFunctionAndThis(
                                             elem, "toLocaleString", cx, scope);
                             funThis = ScriptRuntime.lastStoredScriptable(cx);
-                            elem = fun.call(cx, scope, funThis, ScriptRuntime.emptyArgs);
+                            elem = fun.call(cx, scope, funThis, InterpreterConstants.emptyArgs);
                         }
                         result.append(ScriptRuntime.toString(elem));
                     }
@@ -2125,7 +2126,7 @@ public class NativeArray extends IdScriptableObject implements List {
 
     @Override
     public Object[] toArray() {
-        return toArray(ScriptRuntime.emptyArgs);
+        return toArray(InterpreterConstants.emptyArgs);
     }
 
     @Override

@@ -7,6 +7,7 @@
 package org.redukti.cer.runtime;
 
 import org.redukti.cer.Scriptable;
+import org.redukti.cer.ir.InterpreterConstants;
 
 import java.lang.reflect.Method;
 import java.lang.reflect.Modifier;
@@ -144,7 +145,7 @@ public class InterfaceAdapter {
         }
         WrapFactory wf = cx.getWrapFactory();
         if (args == null) {
-            args = ScriptRuntime.emptyArgs;
+            args = InterpreterConstants.emptyArgs;
         } else {
             for (int i = 0, N = args.length; i != N; ++i) {
                 Object arg = args[i];

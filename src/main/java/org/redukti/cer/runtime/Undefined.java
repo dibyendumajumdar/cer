@@ -7,6 +7,7 @@
 package org.redukti.cer.runtime;
 
 import org.redukti.cer.Scriptable;
+import org.redukti.cer.ir.InterpreterConstants;
 
 import java.io.Serializable;
 
@@ -111,7 +112,7 @@ public class Undefined implements Serializable {
 
                 @Override
                 public Object[] getIds() {
-                    return ScriptRuntime.emptyArgs;
+                    return InterpreterConstants.emptyArgs;
                 }
 
                 @Override

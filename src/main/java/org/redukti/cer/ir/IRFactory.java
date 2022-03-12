@@ -16,6 +16,7 @@ import org.redukti.cer.parser.Parser;
 import org.redukti.cer.parser.Token;
 import org.redukti.cer.parser.ast.*;
 import org.redukti.cer.utils.Kit;
+import org.redukti.cer.utils.StringUtils;
 
 
 /**
@@ -908,7 +909,7 @@ public final class IRFactory extends Parser {
         Node object = new Node(Token.OBJECTLIT);
         Object[] properties;
         if (elems.isEmpty()) {
-            properties = ScriptRuntime.emptyArgs;
+            properties = InterpreterConstants.emptyArgs;
         } else {
             int size = elems.size(), i = 0;
             properties = new Object[size];
@@ -954,15 +955,15 @@ public final class IRFactory extends Parser {
         if (id instanceof Name) {
             String s = ((Name) id).getIdentifier();
             decompiler.addName(s);
-            key = ScriptRuntime.getIndexObject(s);
+            key = StringUtils.getIndexObject(s);
         } else if (id instanceof StringLiteral) {
             String s = ((StringLiteral) id).getValue();
             decompiler.addString(s);
-            key = ScriptRuntime.getIndexObject(s);
+            key = StringUtils.getIndexObject(s);
         } else if (id instanceof NumberLiteral) {
             double n = ((NumberLiteral) id).getNumber();
             decompiler.addNumber(n);
-            key = ScriptRuntime.getIndexObject(n);
+            key = StringUtils.getIndexObject(n);
         } else {
             throw Kit.codeBug();
         }
@@ -1959,7 +1960,7 @@ public final class IRFactory extends Parser {
                 break;
             case Token.BITNOT:
                 if (childType == Token.NUMBER) {
-                    int value = ScriptRuntime.toInt32(child.getDouble());
+                    int value = StringUtils.toInt32(child.getDouble());
                     child.setDouble(~value);
                     return child;
                 }
@@ -2041,6 +2042,10 @@ public final class IRFactory extends Parser {
         throw Kit.codeBug();
     }
 
+    static boolean isSpecialProperty(String s) {
+        return s.equals("__proto__") || s.equals("__parent__");
+    }
+
     private Node createPropertyGet(
             Node target, String namespace, String name, int memberTypeFlags) {
         if (namespace == null && memberTypeFlags == 0) {
@@ -2048,7 +2053,7 @@ public final class IRFactory extends Parser {
                 return createName(name);
             }
             checkActivationName(name, Token.GETPROP);
-            if (ScriptRuntime.isSpecialProperty(name)) {
+            if (isSpecialProperty(name)) {
                 Node ref = new Node(Token.REF_SPECIAL, target);
                 ref.putProp(Node.NAME_PROP, name);
                 return new Node(Token.GET_REF, ref);
@@ -2117,7 +2122,7 @@ public final class IRFactory extends Parser {
                     if (right.type == Token.STRING) {
                         s2 = right.getString();
                     } else if (right.type == Token.NUMBER) {
-                        s2 = ScriptRuntime.numberToString(right.getDouble(), 10);
+                        s2 = StringUtils.numberToString(right.getDouble(), 10);
                     } else {
                         break;
                     }
@@ -2130,7 +2135,7 @@ public final class IRFactory extends Parser {
                         return left;
                     } else if (right.type == Token.STRING) {
                         String s1, s2;
-                        s1 = ScriptRuntime.numberToString(left.getDouble(), 10);
+                        s1 = StringUtils.numberToString(left.getDouble(), 10);
                         s2 = right.getString();
                         right.setString(s1.concat(s2));
                         return right;

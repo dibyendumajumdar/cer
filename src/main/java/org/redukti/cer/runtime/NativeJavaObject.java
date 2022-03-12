@@ -8,6 +8,7 @@ package org.redukti.cer.runtime;
 
 import org.redukti.cer.Scriptable;
 import org.redukti.cer.exception.EvaluatorException;
+import org.redukti.cer.ir.InterpreterConstants;
 import org.redukti.cer.utils.Kit;
 
 import java.io.IOException;
@@ -239,7 +240,7 @@ public class NativeJavaObject implements Scriptable, SymbolScriptable, Wrapper, 
                                 Context.getContext(),
                                 f.getParentScope(),
                                 this,
-                                ScriptRuntime.emptyArgs);
+                                InterpreterConstants.emptyArgs);
             } else {
                 if (hint == ScriptRuntime.NumberClass && javaObject instanceof Boolean) {
                     boolean b = ((Boolean) javaObject).booleanValue();

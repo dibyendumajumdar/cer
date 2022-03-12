@@ -10,4 +10,7 @@ public interface InterpreterConstants {
     // SLOT_SIZE: space for try start/end, handler, start, handler type,
     //            exception local and scope local
     static final int EXCEPTION_SLOT_SIZE = 6;
+
+
+    Object[] emptyArgs = new Object[0];
 }

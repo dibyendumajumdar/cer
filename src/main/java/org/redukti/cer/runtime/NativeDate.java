@@ -7,6 +7,7 @@
 package org.redukti.cer.runtime;
 
 import org.redukti.cer.Scriptable;
+import org.redukti.cer.ir.InterpreterConstants;
 import org.redukti.cer.utils.Kit;
 
 import java.text.DateFormat;
@@ -312,7 +313,7 @@ final class NativeDate extends IdScriptableObject {
                                 ScriptRuntime.toString(o),
                                 ScriptRuntime.toString(toISO));
                     }
-                    Object result = ((Callable) toISO).call(cx, scope, o, ScriptRuntime.emptyArgs);
+                    Object result = ((Callable) toISO).call(cx, scope, o, InterpreterConstants.emptyArgs);
                     if (!ScriptRuntime.isPrimitive(result)) {
                         throw ScriptRuntime.typeErrorById(
                                 "msg.toisostring.must.return.primitive",

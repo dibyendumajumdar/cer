@@ -7,6 +7,7 @@
 package org.redukti.cer.runtime;
 
 import org.redukti.cer.Scriptable;
+import org.redukti.cer.ir.InterpreterConstants;
 
 /**
  * This class implements the activation object.
@@ -39,7 +40,7 @@ public final class NativeCall extends IdScriptableObject {
         setParentScope(scope);
         // leave prototype null
 
-        this.originalArgs = (args == null) ? ScriptRuntime.emptyArgs : args;
+        this.originalArgs = (args == null) ? InterpreterConstants.emptyArgs : args;
         this.isStrict = isStrict;
 
         // initialize values of arguments
