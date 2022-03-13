@@ -1,6 +1,5 @@
 package org.redukti.cer.utils;
 
-import org.redukti.cer.runtime.Context;
 import org.redukti.cer.runtime.support.DToA;
 import org.redukti.cer.runtime.support.DoubleConversion;
 import org.redukti.cer.runtime.support.FastDtoa;

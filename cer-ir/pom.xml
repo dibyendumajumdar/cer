@@ -4,13 +4,16 @@
   xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
   <modelVersion>4.0.0</modelVersion>
 
-  <groupId>org.redukti</groupId>
-  <artifactId>cer</artifactId>
-  <packaging>pom</packaging>
+  <artifactId>cer-ir</artifactId>
+  <packaging>jar</packaging>
   <version>1.0-SNAPSHOT</version>
-
-  <name>cer</name>
+  <name>cer IR</name>
   <url></url>
+    <parent>
+        <groupId>org.redukti</groupId>
+        <artifactId>cer</artifactId>
+        <version>1.0-SNAPSHOT</version>
+    </parent>
 
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -18,16 +21,22 @@
     <maven.compiler.target>1.8</maven.compiler.target>
   </properties>
 
-    <modules>
-        <module>cer-api</module>
-        <module>cer-utils</module>
-        <module>cer-parser</module>
-        <module>cer-ir</module>
-        <module>cer-runtime</module>
-    </modules>
-
-
   <dependencies>
+    <dependency>
+      <groupId>org.redukti</groupId>
+      <artifactId>cer-api</artifactId>
+      <version>1.0-SNAPSHOT</version>
+    </dependency>
+    <dependency>
+      <groupId>org.redukti</groupId>
+      <artifactId>cer-utils</artifactId>
+      <version>1.0-SNAPSHOT</version>
+    </dependency>
+    <dependency>
+      <groupId>org.redukti</groupId>
+      <artifactId>cer-parser</artifactId>
+      <version>1.0-SNAPSHOT</version>
+    </dependency>
     <dependency>
       <groupId>junit</groupId>
       <artifactId>junit</artifactId>

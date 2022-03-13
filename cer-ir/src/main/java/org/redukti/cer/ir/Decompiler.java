@@ -9,7 +9,6 @@ package org.redukti.cer.ir;
 import java.math.BigInteger;
 import org.redukti.cer.parser.Token;
 import org.redukti.cer.parser.ast.FunctionNode;
-import org.redukti.cer.runtime.ScriptRuntime;
 import org.redukti.cer.utils.Kit;
 import org.redukti.cer.utils.StringUtils;
 import org.redukti.cer.utils.UintMap;
@@ -828,7 +827,7 @@ public class Decompiler {
                 sb.append(str);
             } else {
                 sb.append('"');
-                sb.append(ScriptRuntime.escapeString(str));
+                sb.append(StringUtils.escapeString(str));
                 sb.append('"');
             }
         }
@@ -864,7 +863,7 @@ public class Decompiler {
             throw new RuntimeException();
         }
         if (sb != null) {
-            sb.append(ScriptRuntime.numberToString(number, 10));
+            sb.append(StringUtils.numberToString(number, 10));
         }
         return offset;
     }
