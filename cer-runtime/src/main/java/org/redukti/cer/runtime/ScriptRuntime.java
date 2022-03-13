@@ -4849,7 +4849,7 @@ public class ScriptRuntime {
         return masterScriptUrl + '#' + masterScriptLine + "(Function)";
     }
 
-    static boolean isGeneratedScript(String sourceUrl) {
+    public static boolean isGeneratedScript(String sourceUrl) {
         // ALERT: this may clash with a valid URL containing (eval) or
         // (Function)
         return sourceUrl.indexOf("(eval)") >= 0 || sourceUrl.indexOf("(Function)") >= 0;

@@ -833,7 +833,7 @@ public final class Interpreter extends Icode implements Evaluator {
         return 1;
     }
 
-    static int[] getLineNumbers(InterpreterData data) {
+    public static int[] getLineNumbers(InterpreterData data) {
         UintMap presentLines = new UintMap();
 
         byte[] iCode = data.itsICode;
